@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Chatbot() {
     const [isOpen, setIsOpen] = useState(false);
-    const { messages, append, isLoading } = useChat() as any;
+    const { messages, append, isLoading, error } = useChat() as any;
     const [input, setInput] = useState("");
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -125,6 +125,11 @@ export default function Chatbot() {
                                         <span className="w-1.5 h-1.5 bg-[#D4AF37] rounded-full animate-bounce delay-100"></span>
                                         <span className="w-1.5 h-1.5 bg-[#D4AF37] rounded-full animate-bounce delay-200"></span>
                                     </div>
+                                </div>
+                            )}
+                            {error && (
+                                <div className="bg-red-500/10 border border-red-500/20 p-3 rounded-2xl text-red-400 text-xs">
+                                    Bir hata oluştu. Lütfen API anahtarını kontrol edin veya daha sonra tekrar deneyin.
                                 </div>
                             )}
                             <div ref={messagesEndRef} />

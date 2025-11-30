@@ -5,11 +5,12 @@ import { streamText } from "ai";
 export const maxDuration = 30;
 
 export async function POST(req: Request) {
-    const { messages } = await req.json();
+    try {
+        const { messages } = await req.json();
 
-    const result = streamText({
-        model: openai("gpt-4o"),
-        system: `Sen TODER (Tiyatro Oyuncuları Derneği) için çalışan yardımsever, profesyonel ve bilgili bir yapay zeka asistanısın.
+        const result = streamText({
+            model: openai("gpt-4o"),
+            system: `Sen TODER (Tiyatro Oyuncuları Derneği) için çalışan yardımsever, profesyonel ve bilgili bir yapay zeka asistanısın.
     
     Amacın: Ziyaretçilerin sorularını yanıtlamak, üyelik süreçleri hakkında bilgi vermek ve derneğin vizyonunu anlatmak.
 
@@ -26,8 +27,15 @@ export async function POST(req: Request) {
     - Cevapların kısa, öz ve anlaşılır olsun.
     - Türkçe konuş.
     `,
-        messages,
-    });
+            messages,
+        });
 
-    return result.toTextStreamResponse();
+        return result.toTextStreamResponse();
+    } catch (error) {
+        console.error("Chat API Error:", error);
+        return new Response(JSON.stringify({ error: "Failed to process chat request" }), {
+            status: 500,
+            headers: { "Content-Type": "application/json" },
+        });
+    }
 }
