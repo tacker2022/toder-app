@@ -1,7 +1,6 @@
 
 import { addMember, deleteMember, getMembers } from "@/actions/members";
 
-export const runtime = "edge";
 import { Plus, Trash2, Pencil } from "lucide-react";
 import Link from "next/link";
 import MemberSearch from "@/components/admin/MemberSearch";
@@ -57,7 +56,12 @@ export default async function AdminMembersPage({
                                 </div>
                             )}
                             <div>
-                                <h3 className="font-bold text-xl">{member.name}</h3>
+                                <h3 className="font-bold text-xl flex items-center gap-2">
+                                    {member.name}
+                                    <span className="text-xs bg-white/10 px-2 py-1 rounded text-white/50" title="Sıra No">
+                                        #{member.display_order || 0}
+                                    </span>
+                                </h3>
                                 <p className="text-[#D4AF37]">{member.role}</p>
                                 {member.company && (
                                     <p className="text-white/50 text-sm">{member.company}</p>

@@ -1,36 +1,32 @@
-# Cloudflare Pages Deployment Guide
+# Vercel Deployment Guide
 
-Bu projeyi Cloudflare Pages üzerinde yayınlamak için aşağıdaki adımları takip edebilirsiniz.
+This project is optimized for deployment on [Vercel](https://vercel.com), the creators of Next.js.
 
-## 1. Hazırlık
-Projenizin GitHub'a yüklü olduğundan emin olun.
+## 1. Preparation
+Ensure your project is pushed to your GitHub repository.
 
-## 2. Cloudflare Dashboard
-1.  [Cloudflare Dashboard](https://dash.cloudflare.com/) adresine gidin ve giriş yapın.
-2.  Sol menüden **Workers & Pages** seçeneğine tıklayın.
-3.  **Create application** butonuna tıklayın.
-4.  **Pages** sekmesine geçin ve **Connect to Git** butonuna tıklayın.
-5.  GitHub hesabınızı bağlayın ve **toder-app** projesini seçin.
+## 2. Vercel Dashboard
+1. Go to [Vercel Dashboard](https://vercel.com/dashboard) and log in (you can use your GitHub account).
+2. Click on **"Add New..."** -> **"Project"**.
+3. In the "Import Git Repository" section, find `toder-app` and click **Import**.
 
-## 3. Kurulum Ayarları
-Proje seçildikten sonra "Set up builds and deployments" ekranı gelecektir. Aşağıdaki ayarları yapın:
+## 3. Configure Project
+Vercel automatically detects Next.js. You only need to add your environment variables.
 
-*   **Framework preset:** `Next.js` seçin.
-*   **Build command:** `npx @cloudflare/next-on-pages` (Otomatik gelmezse bunu yazın)
-*   **Build output directory:** `.vercel/output/static` (Otomatik gelmezse bunu yazın)
+### Environment Variables
+Expand the **"Environment Variables"** section and add the following from your `.env.local` file:
 
-## 4. Çevresel Değişkenler (Environment Variables)
-Aynı ekranda **Environment variables (advanced)** bölümünü açın ve `.env.local` dosyanızdaki değerleri buraya ekleyin:
-
-| Variable Name | Value |
-| :--- | :--- |
+| Key | Value |
+| --- | --- |
 | `NEXT_PUBLIC_SUPABASE_URL` | `https://jeglhzoaknjlawnuqefm.supabase.co` |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | `(Sizin Anon Key'iniz - .env.local dosyasından kopyalayın)` |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | *(Paste your Anon Key here)* |
 
-> **Not:** `NODE_VERSION` değişkeni ekleyerek `20` değerini vermeniz önerilir.
+## 4. Deploy
+Click **Deploy**.
 
-## 5. Deploy
-**Save and Deploy** butonuna tıklayın. Cloudflare projenizi derleyip yayına alacaktır. İşlem bittiğinde size `toder-app.pages.dev` gibi bir adres verecektir.
+Vercel will build your application. Once finished, you will get a live URL (e.g., `toder-app.vercel.app`).
 
-## 6. Özel Alan Adı (Custom Domain)
-Yayına alındıktan sonra **Custom domains** sekmesinden `toder.org.tr` gibi kendi alan adınızı bağlayabilirsiniz.
+## 5. Custom Domain (Optional)
+1. Go to your project dashboard on Vercel.
+2. Click **Settings** -> **Domains**.
+3. Add your custom domain (e.g., `toder.org.tr`) and follow the DNS configuration instructions.

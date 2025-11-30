@@ -9,7 +9,8 @@ export async function getMembers(query?: string, company?: string) {
     let dbQuery = supabase
         .from("members")
         .select("*")
-        .order("created_at", { ascending: false });
+        .select("*")
+        .order("display_order", { ascending: true });
 
     if (query) {
         dbQuery = dbQuery.ilike("name", `%${query}%`);
@@ -33,6 +34,7 @@ export async function addMember(formData: FormData) {
     const supabase = await createClient();
     const name = formData.get("name") as string;
     const role = formData.get("role") as string;
+    const display_order = parseInt(formData.get("display_order") as string) || 0;
     const imageFile = formData.get("image") as File;
 
     let imageUrl = "";
@@ -64,6 +66,7 @@ export async function addMember(formData: FormData) {
         name,
         role,
         company: formData.get("company") as string,
+        display_order,
         image_url: imageUrl,
     });
 
@@ -97,12 +100,14 @@ export async function updateMember(id: string, formData: FormData) {
     const name = formData.get("name") as string;
     const role = formData.get("role") as string;
     const company = formData.get("company") as string;
+    const display_order = parseInt(formData.get("display_order") as string) || 0;
     const imageFile = formData.get("image") as File;
 
     const updates: any = {
         name,
         role,
         company,
+        display_order,
     };
 
     if (imageFile && imageFile.size > 0) {

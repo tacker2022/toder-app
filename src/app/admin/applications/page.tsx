@@ -1,6 +1,5 @@
 import { getApplications, updateApplicationStatus } from "@/actions/applications";
 
-export const runtime = "edge";
 import { Check, X, Clock } from "lucide-react";
 
 export default async function ApplicationsPage() {

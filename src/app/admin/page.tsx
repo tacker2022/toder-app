@@ -1,6 +1,5 @@
 import { getDashboardStats } from "@/actions/dashboard";
 
-export const runtime = "edge";
 import { Users, Calendar, FileText, ArrowRight } from "lucide-react";
 import Link from "next/link";
 

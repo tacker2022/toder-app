@@ -1,38 +1,27 @@
-import { getMember, updateMember } from "@/actions/members";
-
-import { redirect } from "next/navigation";
+import { addMember } from "@/actions/members";
 import { Save, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
-export default async function EditMemberPage({ params }: { params: { id: string } }) {
-    const { id } = await params;
-    const member = await getMember(id);
-
-    if (!member) {
-        redirect("/admin/members");
-    }
-
-    const updateMemberWithId = updateMember.bind(null, id);
-
+export default function NewMemberPage() {
     return (
         <div>
             <div className="flex items-center gap-4 mb-8">
                 <Link href="/admin/members" className="text-white/50 hover:text-white transition-colors">
                     <ArrowLeft size={24} />
                 </Link>
-                <h1 className="text-3xl font-bold">Üye Düzenle</h1>
+                <h1 className="text-3xl font-bold">Yeni Üye Ekle</h1>
             </div>
 
             <div className="bg-[#0a0a0a] border border-white/10 p-6 rounded-xl max-w-2xl">
-                <form action={updateMemberWithId} className="grid grid-cols-1 gap-4">
+                <form action={addMember} className="grid grid-cols-1 gap-4">
                     <div>
                         <label className="block text-sm text-white/50 mb-1">Ad Soyad</label>
                         <input
                             type="text"
                             name="name"
-                            defaultValue={member.name}
                             required
                             className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#D4AF37]"
+                            placeholder="Örn: Ahmet Yılmaz"
                         />
                     </div>
 
@@ -41,9 +30,9 @@ export default async function EditMemberPage({ params }: { params: { id: string 
                         <input
                             type="text"
                             name="role"
-                            defaultValue={member.role}
                             required
                             className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#D4AF37]"
+                            placeholder="Örn: Yönetim Kurulu Başkanı"
                         />
                     </div>
 
@@ -52,30 +41,23 @@ export default async function EditMemberPage({ params }: { params: { id: string 
                         <input
                             type="text"
                             name="company"
-                            defaultValue={member.company || ""}
                             className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#D4AF37]"
+                            placeholder="Örn: TODER A.Ş."
                         />
                     </div>
 
                     <div>
-                        <label className="block text-sm text-white/50 mb-1">Sıra No</label>
+                        <label className="block text-sm text-white/50 mb-1">Sıra No (Küçükten büyüğe sıralanır)</label>
                         <input
                             type="number"
                             name="display_order"
-                            defaultValue={member.display_order || 0}
+                            defaultValue="0"
                             className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#D4AF37]"
                         />
                     </div>
 
                     <div>
-                        <label className="block text-sm text-white/50 mb-1">Fotoğraf (Değiştirmek için seçin)</label>
-                        {member.image_url && (
-                            <img
-                                src={member.image_url}
-                                alt="Current"
-                                className="w-20 h-20 rounded-full object-cover mb-2 border border-white/10"
-                            />
-                        )}
+                        <label className="block text-sm text-white/50 mb-1">Fotoğraf</label>
                         <input
                             type="file"
                             name="image"
@@ -89,7 +71,7 @@ export default async function EditMemberPage({ params }: { params: { id: string 
                         className="bg-[#D4AF37] text-black font-bold py-3 rounded-lg hover:bg-[#b8962e] transition-colors flex items-center justify-center gap-2 mt-4"
                     >
                         <Save size={20} />
-                        Değişiklikleri Kaydet
+                        Kaydet
                     </button>
                 </form>
             </div>

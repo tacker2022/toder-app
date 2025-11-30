@@ -1,5 +1,4 @@
 import { getEvents, addEvent, deleteEvent } from "@/actions/events";
-export const runtime = "edge";
 import { Trash2, Plus } from "lucide-react";
 
 export default async function EventsPage() {
