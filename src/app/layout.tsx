@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/react";
+import Script from "next/script";
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
@@ -88,6 +89,19 @@ export default function RootLayout({
             }),
           }}
         />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-YZ2TXWFEV0"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-YZ2TXWFEV0');
+          `}
+        </Script>
       </body>
     </html>
   );
