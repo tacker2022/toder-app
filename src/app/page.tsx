@@ -20,7 +20,7 @@ export default async function Home() {
 
   return (
     <main>
-      <SplashScreen />
+      <SplashScreen members={members} />
       <Hero />
       <Vision />
       <Management members={members} />
