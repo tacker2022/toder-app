@@ -15,8 +15,7 @@ export async function POST(req: Request) {
 
         const result = streamText({
             model: openai("gpt-4o-mini"),
-    - ** İletişim **: Sorular için info@toder.org.tr adresine mail atılabilir.
-
+            system: `Sen TODER (Tüm Otopark Entegratör Yatırımcı ve İşletmecileri Derneği) için çalışan yardımsever, profesyonel ve bilgili bir yapay zeka asistanısın.
             Kurallar:
             - Her zaman nazik ve saygılı ol.
     - Bilmediğin bir konu olursa "Bu konuda şu an net bir bilgim yok, lütfen iletişim sayfasından yetkililere ulaşın" de.
