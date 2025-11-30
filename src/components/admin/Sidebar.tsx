@@ -12,6 +12,7 @@ export default function AdminSidebar() {
         { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
         { href: "/admin/events", label: "Etkinlikler", icon: Calendar },
         { href: "/admin/members", label: "Üyeler", icon: Users },
+        { href: "/admin/associations", label: "Üye Dernekler", icon: Users },
     ];
 
     return (

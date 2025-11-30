@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import { getEvents } from "@/actions/events";
 import { getMembers } from "@/actions/members";
 import BlogSection from "@/components/BlogSection";
+import Associations from "@/components/Associations";
 
 export default async function Home() {
   const events = await getEvents();
@@ -24,6 +25,7 @@ export default async function Home() {
       <Commissions />
       <Events events={events} />
       <BlogSection />
+      <Associations />
       <CTA />
       <Footer />
     </main>
