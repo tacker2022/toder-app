@@ -1,4 +1,6 @@
 import { getApplications, updateApplicationStatus } from "@/actions/applications";
+
+export const runtime = "edge";
 import { Check, X, Clock } from "lucide-react";
 
 export default async function ApplicationsPage() {
@@ -18,8 +20,8 @@ export default async function ApplicationsPage() {
                             <div className="flex items-center gap-3 mb-2">
                                 <h3 className="font-bold text-lg">{app.full_name}</h3>
                                 <span className={`px-3 py-1 rounded-full text-xs font-medium ${app.status === 'approved' ? 'bg-green-500/20 text-green-400' :
-                                        app.status === 'rejected' ? 'bg-red-500/20 text-red-400' :
-                                            'bg-yellow-500/20 text-yellow-400'
+                                    app.status === 'rejected' ? 'bg-red-500/20 text-red-400' :
+                                        'bg-yellow-500/20 text-yellow-400'
                                     }`}>
                                     {app.status === 'approved' ? 'Onaylandı' :
                                         app.status === 'rejected' ? 'Reddedildi' :

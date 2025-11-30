@@ -1,4 +1,6 @@
 import { getPostBySlug } from "@/actions/posts";
+
+export const runtime = "edge";
 import { Calendar, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";

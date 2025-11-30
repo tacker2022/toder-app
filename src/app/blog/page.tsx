@@ -1,4 +1,6 @@
 import { getPosts } from "@/actions/posts";
+
+export const runtime = "edge";
 import { Calendar, ArrowRight, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 

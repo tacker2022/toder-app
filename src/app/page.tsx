@@ -1,4 +1,6 @@
 import Navbar from "@/components/Navbar";
+
+export const runtime = "edge";
 import Hero from "@/components/Hero";
 import Vision from "@/components/Vision";
 import Management from "@/components/Management";

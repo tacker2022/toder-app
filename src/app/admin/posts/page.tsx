@@ -1,4 +1,6 @@
-import { getPosts, deletePost } from "@/actions/posts";
+import { deletePost, getPosts } from "@/actions/posts";
+
+export const runtime = "edge";
 import { Plus, Trash2, Eye, Calendar } from "lucide-react";
 import Link from "next/link";
 

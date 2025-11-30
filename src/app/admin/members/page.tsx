@@ -1,4 +1,7 @@
-import { getMembers, deleteMember } from "@/actions/members";
+
+import { addMember, deleteMember, getMembers } from "@/actions/members";
+
+export const runtime = "edge";
 import { Plus, Trash2, Pencil } from "lucide-react";
 import Link from "next/link";
 import MemberSearch from "@/components/admin/MemberSearch";

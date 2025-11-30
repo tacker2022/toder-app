@@ -1,4 +1,6 @@
 import { getMember, updateMember } from "@/actions/members";
+
+export const runtime = "edge";
 import { redirect } from "next/navigation";
 import { Save, ArrowLeft } from "lucide-react";
 import Link from "next/link";
