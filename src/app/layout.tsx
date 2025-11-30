@@ -10,7 +10,8 @@ export const metadata: Metadata = {
   title: "TODER Project | Sektörel Yenilik ve İşbirliği",
   description: "TODER Project - Sektörel Yenilik, İşbirliği ve Dijital Dönüşüm Platformu.",
 };
-children,
+export default function RootLayout({
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
