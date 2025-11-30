@@ -7,8 +7,26 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Chatbot() {
     const [isOpen, setIsOpen] = useState(false);
-    const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat();
+    const { messages, append, isLoading } = useChat();
+    const [input, setInput] = useState("");
     const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement> | { target: { value: string } }) => {
+        setInput(e.target.value);
+    };
+
+    const handleSubmit = async (e?: React.FormEvent) => {
+        e?.preventDefault();
+        if (!input.trim()) return;
+
+        const userMessage = input;
+        setInput(""); // Clear input immediately
+
+        await append({
+            role: "user",
+            content: userMessage,
+        });
+    };
 
     // Auto-scroll to bottom
     useEffect(() => {
@@ -57,8 +75,9 @@ export default function Chatbot() {
                                     <div className="mt-4 flex flex-wrap justify-center gap-2">
                                         <button
                                             onClick={() => {
-                                                const event = { target: { value: "Üyelik şartları nelerdir?" } } as any;
-                                                handleInputChange(event);
+                                                const value = "Üyelik şartları nelerdir?";
+                                                setInput(value);
+                                                append({ role: "user", content: value });
                                             }}
                                             className="text-xs bg-white/5 hover:bg-white/10 border border-white/10 rounded-full px-3 py-1 transition-colors"
                                         >
@@ -66,8 +85,9 @@ export default function Chatbot() {
                                         </button>
                                         <button
                                             onClick={() => {
-                                                const event = { target: { value: "Komisyonlar hakkında bilgi ver." } } as any;
-                                                handleInputChange(event);
+                                                const value = "Komisyonlar hakkında bilgi ver.";
+                                                setInput(value);
+                                                append({ role: "user", content: value });
                                             }}
                                             className="text-xs bg-white/5 hover:bg-white/10 border border-white/10 rounded-full px-3 py-1 transition-colors"
                                         >
