@@ -97,7 +97,7 @@ export default function Chatbot() {
                                 </div>
                             )}
 
-                            {messages.map((m) => (
+                            {messages.map((m: any) => (
                                 <div
                                     key={m.id}
                                     className={`flex gap-3 ${m.role === "user" ? "flex-row-reverse" : ""}`}
