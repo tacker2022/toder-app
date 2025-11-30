@@ -24,14 +24,15 @@ export default function Management({ members }: { members: Member[] }) {
                             key={member.id}
                             className="member-card glass-card"
                             initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                         >
                             {member.image_url ? (
                                 <img
                                     src={member.image_url}
                                     alt={member.name}
+                                    loading="eager"
                                     className="w-[120px] h-[120px] rounded-full object-cover mx-auto mb-6 border-2 border-white/5"
                                 />
                             ) : (

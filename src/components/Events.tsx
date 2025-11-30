@@ -30,8 +30,8 @@ export default function Events({ events }: { events: Event[] }) {
                                 key={event.id}
                                 className="event-card glass-card"
                                 initial={{ opacity: 0, x: 20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                             >
                                 <div className="event-date">
@@ -43,6 +43,7 @@ export default function Events({ events }: { events: Event[] }) {
                                         <img
                                             src={event.image_url}
                                             alt={event.title}
+                                            loading="eager"
                                             className="w-full h-48 object-cover rounded-lg mb-4"
                                         />
                                     )}
