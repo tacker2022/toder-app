@@ -116,8 +116,8 @@ export default function Chatbot() {
                                         {m.role === "user" ? <User size={16} /> : <Bot size={16} className="text-black" />}
                                     </div>
                                     <div className={`p-3 rounded-2xl text-sm max-w-[80%] ${m.role === "user"
-                                            ? "bg-white/10 text-white rounded-tr-none"
-                                            : "bg-[#D4AF37]/10 border border-[#D4AF37]/20 text-white rounded-tl-none"
+                                        ? "bg-white/10 text-white rounded-tr-none"
+                                        : "bg-[#D4AF37]/10 border border-[#D4AF37]/20 text-white rounded-tl-none"
                                         }`}>
                                         {m.content}
                                     </div>
@@ -138,7 +138,12 @@ export default function Chatbot() {
                             )}
                             {error && (
                                 <div className="bg-red-500/10 border border-red-500/20 p-3 rounded-2xl text-red-400 text-xs">
-                                    Bir hata oluştu. Lütfen API anahtarını kontrol edin veya daha sonra tekrar deneyin.
+                                    <p className="font-bold">Hata Oluştu:</p>
+                                    <p>{error.message || "Bilinmeyen hata"}</p>
+                                    {/* Debug info */}
+                                    <pre className="mt-2 opacity-50 text-[10px] whitespace-pre-wrap">
+                                        {JSON.stringify(error, null, 2)}
+                                    </pre>
                                 </div>
                             )}
                             <div ref={messagesEndRef} />

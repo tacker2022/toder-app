@@ -8,6 +8,10 @@ export async function POST(req: Request) {
     try {
         const { messages } = await req.json();
 
+        if (!process.env.OPENAI_API_KEY) {
+            throw new Error("OPENAI_API_KEY is not set in environment variables");
+        }
+
         const result = streamText({
             model: openai("gpt-4o"),
             system: `Sen TODER (Tiyatro Oyuncuları Derneği) için çalışan yardımsever, profesyonel ve bilgili bir yapay zeka asistanısın.
