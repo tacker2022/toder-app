@@ -1,0 +1,34 @@
+[
+  {
+    "id": "1",
+    "name": "Ahmet Yılmaz",
+    "role": "Başkan"
+  },
+  {
+    "id": "2",
+    "name": "Ayşe Demir",
+    "role": "Başkan Yardımcısı"
+  },
+  {
+    "id": "3",
+    "name": "Mehmet Kaya",
+    "role": "Genel Sekreter"
+  },
+  {
+    "id": "4",
+    "name": "Zeynep Çelik",
+    "role": "Yönetim Kurulu Üyesi"
+  },
+  {
+    "id": "1764445205428",
+    "name": "TALHA EMRE ÇALARGÜN",
+    "role": "GENEL BAŞKAN",
+    "imageUrl": ""
+  },
+  {
+    "id": "1764445479104",
+    "name": "TALHA EMRE ÇALARGÜN",
+    "role": "GENEL BAŞKAN2",
+    "imageUrl": "/uploads/1764445479091-IMG_6688-Copy.JPG"
+  }
+]
