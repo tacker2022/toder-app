@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function Chatbot() {
     const [isOpen, setIsOpen] = useState(false);
     const { messages, append, isLoading, error } = useChat({
-        api: "/api/chat",
+
         onError: (err) => {
             console.error("Chat error:", err);
         }
