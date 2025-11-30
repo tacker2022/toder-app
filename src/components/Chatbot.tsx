@@ -37,6 +37,31 @@ export default function Chatbot() {
         }
     };
 
+    const testConnection = async () => {
+        try {
+            console.log("Testing connection...");
+            const response = await fetch("/api/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ messages: [{ role: "user", content: "Test" }] }),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error("Test failed:", response.status, errorText);
+                alert(`Bağlantı Hatası: ${response.status}\n${errorText}`);
+                return;
+            }
+
+            const data = await response.text();
+            console.log("Test success:", data);
+            alert("Bağlantı Başarılı! Sunucudan cevap geldi.");
+        } catch (err) {
+            console.error("Test error:", err);
+            alert(`Bağlantı Hatası: ${(err as Error).message}`);
+        }
+    };
+
     // Auto-scroll to bottom
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -66,12 +91,21 @@ export default function Chatbot() {
                                     </span>
                                 </div>
                             </div>
-                            <button
-                                onClick={() => setIsOpen(false)}
-                                className="hover:bg-black/10 p-1 rounded-lg transition-colors"
-                            >
-                                <X size={20} />
-                            </button>
+                            <div className="flex gap-2">
+                                <button
+                                    onClick={testConnection}
+                                    className="bg-red-500/20 hover:bg-red-500/30 p-1 rounded text-xs font-bold"
+                                    title="Bağlantıyı Test Et"
+                                >
+                                    TEST
+                                </button>
+                                <button
+                                    onClick={() => setIsOpen(false)}
+                                    className="hover:bg-black/10 p-1 rounded-lg transition-colors"
+                                >
+                                    <X size={20} />
+                                </button>
+                            </div>
                         </div>
 
                         {/* Messages */}
