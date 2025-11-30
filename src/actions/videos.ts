@@ -53,12 +53,11 @@ export async function deleteVideo(id: string) {
 
     if (error) {
         console.error("Error deleting video:", error);
-        return { error: error.message };
+        throw new Error(error.message);
     }
 
     revalidatePath("/admin/videos");
     revalidatePath("/");
-    return { success: true };
 }
 
 
