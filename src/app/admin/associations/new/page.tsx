@@ -1,8 +1,36 @@
+"use client";
+
 import { addAssociation } from "@/actions/associations";
-import { Save, ArrowLeft } from "lucide-react";
+import { Save, ArrowLeft, AlertCircle } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function NewAssociationPage() {
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
+    const router = useRouter();
+
+    async function handleSubmit(formData: FormData) {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const result = await addAssociation(formData);
+
+            if (result && 'error' in result && result.error) {
+                setError(result.error);
+                setLoading(false);
+            } else {
+                // Success
+                router.push("/admin/associations");
+            }
+        } catch (e) {
+            setError("Beklenmedik bir hata oluştu.");
+            setLoading(false);
+        }
+    }
+
     return (
         <div>
             <div className="flex items-center gap-4 mb-8">
@@ -13,7 +41,14 @@ export default function NewAssociationPage() {
             </div>
 
             <div className="bg-[#0a0a0a] border border-white/10 p-6 rounded-xl max-w-2xl">
-                <form action={addAssociation} className="grid grid-cols-1 gap-4">
+                {error && (
+                    <div className="bg-red-500/10 border border-red-500/20 text-red-500 p-4 rounded-lg mb-6 flex items-center gap-3">
+                        <AlertCircle size={20} />
+                        <p>{error}</p>
+                    </div>
+                )}
+
+                <form action={handleSubmit} className="grid grid-cols-1 gap-4">
                     <div>
                         <label className="block text-sm text-white/50 mb-1">Dernek Adı</label>
                         <input
@@ -49,10 +84,15 @@ export default function NewAssociationPage() {
 
                     <button
                         type="submit"
-                        className="bg-[#D4AF37] text-black font-bold py-3 rounded-lg hover:bg-[#b8962e] transition-colors flex items-center justify-center gap-2 mt-4"
+                        disabled={loading}
+                        className="bg-[#D4AF37] text-black font-bold py-3 rounded-lg hover:bg-[#b8962e] transition-colors flex items-center justify-center gap-2 mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                        <Save size={20} />
-                        Kaydet
+                        {loading ? (
+                            <div className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+                        ) : (
+                            <Save size={20} />
+                        )}
+                        {loading ? "Kaydediliyor..." : "Kaydet"}
                     </button>
                 </form>
             </div>

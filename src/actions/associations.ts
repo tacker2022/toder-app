@@ -45,10 +45,10 @@ export async function addAssociation(formData: FormData) {
             imageUrl = publicUrlData.publicUrl;
         } catch (imageError) {
             console.error("Failed to upload association image:", imageError);
-            throw new Error(`Failed to upload image: ${(imageError as Error).message}`);
+            return { error: `Upload Error: ${(imageError as Error).message}` };
         }
     } else {
-        throw new Error("Image is required");
+        return { error: "Image is required" };
     }
 
     const { error } = await supabase.from("associations").insert({
@@ -59,11 +59,12 @@ export async function addAssociation(formData: FormData) {
 
     if (error) {
         console.error("Error adding association:", error);
-        throw new Error("Failed to add association");
+        return { error: `Database Error: ${error.message}` };
     }
 
     revalidatePath("/admin/associations");
     revalidatePath("/");
+    return { success: true };
 }
 
 export async function deleteAssociation(id: string) {
