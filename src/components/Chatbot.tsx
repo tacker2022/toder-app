@@ -1,6 +1,6 @@
 "use client";
 
-import { useChat } from "ai/react";
+import { useChat } from "@ai-sdk/react";
 import { MessageCircle, X, Send, Bot, User } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -87,8 +87,8 @@ export default function Chatbot() {
                                         {m.role === "user" ? <User size={16} /> : <Bot size={16} className="text-black" />}
                                     </div>
                                     <div className={`p-3 rounded-2xl text-sm max-w-[80%] ${m.role === "user"
-                                            ? "bg-white/10 text-white rounded-tr-none"
-                                            : "bg-[#D4AF37]/10 border border-[#D4AF37]/20 text-white rounded-tl-none"
+                                        ? "bg-white/10 text-white rounded-tr-none"
+                                        : "bg-[#D4AF37]/10 border border-[#D4AF37]/20 text-white rounded-tl-none"
                                         }`}>
                                         {m.content}
                                     </div>
