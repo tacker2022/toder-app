@@ -10,7 +10,7 @@ export default function Footer() {
                     <Link href="/" className="logo">
                         TODER<span className="accent">.</span>
                     </Link>
-                    <p>© 2024 TODER Project – All Rights Reserved</p>
+                    <p>© {new Date().getFullYear()} TODER Project – All Rights Reserved</p>
                 </div>
                 <div className="footer-links">
                     <a href="#">Hakkımızda</a>
