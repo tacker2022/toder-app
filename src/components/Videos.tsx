@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { getVideos, getYouTubeID } from "@/actions/videos";
+import { getVideos } from "@/actions/videos";
+import { getYouTubeID } from "@/utils/youtube";
 import { Play, X } from "lucide-react";
 
 export default function Videos() {

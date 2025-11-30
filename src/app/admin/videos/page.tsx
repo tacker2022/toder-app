@@ -1,7 +1,7 @@
 import { getVideos, deleteVideo } from "@/actions/videos";
 import { Plus, Trash2, ExternalLink, Video } from "lucide-react";
 import Link from "next/link";
-import { getYouTubeID } from "@/actions/videos";
+import { getYouTubeID } from "@/utils/youtube";
 
 export default async function AdminVideosPage() {
     const videos = await getVideos();
