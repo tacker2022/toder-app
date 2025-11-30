@@ -6,12 +6,18 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Chatbot() {
-    const [isOpen, setIsOpen] = useState(false);
-    const { messages, sendMessage, isLoading, error } = useChat({
+    const chatHelpers = useChat({
         onError: (err) => {
             console.error("Chat error:", err);
         }
     }) as any;
+
+    const { messages, sendMessage, append, isLoading, error } = chatHelpers;
+
+    // Debug: Log available methods
+    useEffect(() => {
+        console.log("useChat methods:", Object.keys(chatHelpers));
+    }, []);
 
     const [input, setInput] = useState("");
     const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -28,7 +34,22 @@ export default function Chatbot() {
         setInput(""); // Clear input immediately
 
         try {
-            await sendMessage(userMessage);
+            const messageData = {
+                role: "user",
+                content: userMessage,
+            };
+
+            // Prefer append if available, otherwise sendMessage
+            if (typeof append === 'function') {
+                console.log("Using append...");
+                await append(messageData);
+            } else if (typeof sendMessage === 'function') {
+                console.log("Using sendMessage...");
+                await sendMessage(messageData);
+            } else {
+                console.error("No send method available!");
+                alert("Mesaj gönderme fonksiyonu bulunamadı.");
+            }
         } catch (err) {
             console.error("Failed to send message:", err);
         }
@@ -85,7 +106,10 @@ export default function Chatbot() {
                                             onClick={() => {
                                                 const value = "Üyelik şartları nelerdir?";
                                                 setInput(value);
-                                                sendMessage(value);
+                                                // Trigger send manually
+                                                const messageData = { role: "user", content: value };
+                                                if (typeof append === 'function') append(messageData);
+                                                else if (typeof sendMessage === 'function') sendMessage(messageData);
                                             }}
                                             className="text-xs bg-white/5 hover:bg-white/10 border border-white/10 rounded-full px-3 py-1 transition-colors"
                                         >
@@ -95,7 +119,10 @@ export default function Chatbot() {
                                             onClick={() => {
                                                 const value = "Komisyonlar hakkında bilgi ver.";
                                                 setInput(value);
-                                                sendMessage(value);
+                                                // Trigger send manually
+                                                const messageData = { role: "user", content: value };
+                                                if (typeof append === 'function') append(messageData);
+                                                else if (typeof sendMessage === 'function') sendMessage(messageData);
                                             }}
                                             className="text-xs bg-white/5 hover:bg-white/10 border border-white/10 rounded-full px-3 py-1 transition-colors"
                                         >
