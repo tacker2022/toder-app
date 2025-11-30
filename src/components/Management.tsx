@@ -23,10 +23,9 @@ export default function Management({ members }: { members: Member[] }) {
                         <motion.div
                             key={member.id}
                             className="member-card glass-card"
-                            initial={{ opacity: 0, scale: 0.9 }}
-
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                            transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
                         >
                             {member.image_url ? (
                                 <img

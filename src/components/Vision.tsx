@@ -31,10 +31,9 @@ export default function Vision() {
                         <motion.div
                             key={index}
                             className="card glass-card"
-                            initial={{ opacity: 0, y: 30 }}
-
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: index * 0.2 }}
+                            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                            transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.2 }}
                             whileHover={{ y: -10 }}
                         >
                             <div className="card-icon">{item.icon}</div>
