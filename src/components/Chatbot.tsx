@@ -7,17 +7,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Chatbot() {
     const [isOpen, setIsOpen] = useState(false);
-    const chatHelpers = useChat({
+    const { messages, sendMessage, isLoading, error } = useChat({
         onError: (err) => {
             console.error("Chat error:", err);
         }
     }) as any;
 
-    const { messages, append, isLoading, error } = chatHelpers;
-
-    useEffect(() => {
-        console.log("useChat helpers:", chatHelpers);
-    }, [chatHelpers]);
     const [input, setInput] = useState("");
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -33,14 +28,10 @@ export default function Chatbot() {
         setInput(""); // Clear input immediately
 
         try {
-            if (append) {
-                await append({
-                    role: "user",
-                    content: userMessage,
-                });
-            } else {
-                console.error("Append function is missing");
-            }
+            await sendMessage({
+                role: "user",
+                content: userMessage,
+            });
         } catch (err) {
             console.error("Failed to send message:", err);
         }
@@ -95,9 +86,7 @@ export default function Chatbot() {
                                             onClick={() => {
                                                 const value = "Üyelik şartları nelerdir?";
                                                 setInput(value);
-                                                if (append) {
-                                                    append({ role: "user", content: value });
-                                                }
+                                                sendMessage({ role: "user", content: value });
                                             }}
                                             className="text-xs bg-white/5 hover:bg-white/10 border border-white/10 rounded-full px-3 py-1 transition-colors"
                                         >
@@ -107,9 +96,7 @@ export default function Chatbot() {
                                             onClick={() => {
                                                 const value = "Komisyonlar hakkında bilgi ver.";
                                                 setInput(value);
-                                                if (append) {
-                                                    append({ role: "user", content: value });
-                                                }
+                                                sendMessage({ role: "user", content: value });
                                             }}
                                             className="text-xs bg-white/5 hover:bg-white/10 border border-white/10 rounded-full px-3 py-1 transition-colors"
                                         >
@@ -129,8 +116,8 @@ export default function Chatbot() {
                                         {m.role === "user" ? <User size={16} /> : <Bot size={16} className="text-black" />}
                                     </div>
                                     <div className={`p-3 rounded-2xl text-sm max-w-[80%] ${m.role === "user"
-                                        ? "bg-white/10 text-white rounded-tr-none"
-                                        : "bg-[#D4AF37]/10 border border-[#D4AF37]/20 text-white rounded-tl-none"
+                                            ? "bg-white/10 text-white rounded-tr-none"
+                                            : "bg-[#D4AF37]/10 border border-[#D4AF37]/20 text-white rounded-tl-none"
                                         }`}>
                                         {m.content}
                                     </div>
