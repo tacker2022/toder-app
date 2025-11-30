@@ -11,6 +11,7 @@ import { getEvents } from "@/actions/events";
 import { getMembers } from "@/actions/members";
 import BlogSection from "@/components/BlogSection";
 import Associations from "@/components/Associations";
+import Videos from "@/components/Videos";
 
 export default async function Home() {
   const events = await getEvents();
@@ -24,6 +25,7 @@ export default async function Home() {
       <Management members={members} />
       <Commissions />
       <Events events={events} />
+      <Videos />
       <BlogSection />
       <Associations />
       <CTA />
