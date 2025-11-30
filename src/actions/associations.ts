@@ -45,7 +45,7 @@ export async function addAssociation(formData: FormData) {
             imageUrl = publicUrlData.publicUrl;
         } catch (imageError) {
             console.error("Failed to upload association image:", imageError);
-            throw new Error("Failed to upload image");
+            throw new Error(`Failed to upload image: ${(imageError as Error).message}`);
         }
     } else {
         throw new Error("Image is required");
