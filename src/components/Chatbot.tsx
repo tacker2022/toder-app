@@ -7,7 +7,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Chatbot() {
     const [isOpen, setIsOpen] = useState(false);
-    const { messages, append, isLoading, error } = useChat() as any;
+    const { messages, append, isLoading, error } = useChat({
+        api: "/api/chat",
+        onError: (err) => {
+            console.error("Chat error:", err);
+        }
+    }) as any;
     const [input, setInput] = useState("");
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -22,10 +27,18 @@ export default function Chatbot() {
         const userMessage = input;
         setInput(""); // Clear input immediately
 
-        await append({
-            role: "user",
-            content: userMessage,
-        });
+        try {
+            if (append) {
+                await append({
+                    role: "user",
+                    content: userMessage,
+                });
+            } else {
+                console.error("Append function is missing");
+            }
+        } catch (err) {
+            console.error("Failed to send message:", err);
+        }
     };
 
     // Auto-scroll to bottom
@@ -77,7 +90,9 @@ export default function Chatbot() {
                                             onClick={() => {
                                                 const value = "Üyelik şartları nelerdir?";
                                                 setInput(value);
-                                                append({ role: "user", content: value });
+                                                if (append) {
+                                                    append({ role: "user", content: value });
+                                                }
                                             }}
                                             className="text-xs bg-white/5 hover:bg-white/10 border border-white/10 rounded-full px-3 py-1 transition-colors"
                                         >
@@ -87,7 +102,9 @@ export default function Chatbot() {
                                             onClick={() => {
                                                 const value = "Komisyonlar hakkında bilgi ver.";
                                                 setInput(value);
-                                                append({ role: "user", content: value });
+                                                if (append) {
+                                                    append({ role: "user", content: value });
+                                                }
                                             }}
                                             className="text-xs bg-white/5 hover:bg-white/10 border border-white/10 rounded-full px-3 py-1 transition-colors"
                                         >
