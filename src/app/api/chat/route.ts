@@ -13,7 +13,7 @@ export async function POST(req: Request) {
         }
 
         const result = streamText({
-            model: openai("gpt-4o"),
+            model: openai("gpt-4o-mini"),
             system: `Sen TODER (Tiyatro Oyuncuları Derneği) için çalışan yardımsever, profesyonel ve bilgili bir yapay zeka asistanısın.
     
     Amacın: Ziyaretçilerin sorularını yanıtlamak, üyelik süreçleri hakkında bilgi vermek ve derneğin vizyonunu anlatmak.
