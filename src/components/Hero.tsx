@@ -58,7 +58,7 @@ export default function Hero() {
                     transition={{ duration: 1, delay: 0.5 }}
                     className="hero-subtitle"
                 >
-                    Sektörel Yenilik, İşbirliği ve Dijital Dönüşüm Platformu
+                    Sektörün Geleceğini Birlikte Şekillendiriyoruz
                 </motion.p>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
