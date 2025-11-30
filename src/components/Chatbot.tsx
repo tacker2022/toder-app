@@ -6,6 +6,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Chatbot() {
+    const [isOpen, setIsOpen] = useState(false);
     const chatHelpers = useChat({
         onError: (err) => {
             console.error("Chat error:", err);
