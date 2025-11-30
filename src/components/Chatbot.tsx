@@ -7,18 +7,10 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Chatbot() {
     const [isOpen, setIsOpen] = useState(false);
-    const chatHelpers = useChat({
-        onError: (err) => {
-            console.error("Chat error:", err);
-        }
-    }) as any;
-
-    const { messages, sendMessage, append, isLoading, error } = chatHelpers;
-
-    // Debug: Log available methods
-    useEffect(() => {
-        console.log("useChat methods:", Object.keys(chatHelpers));
-    }, []);
+    // Manual Chat Implementation
+    const [messages, setMessages] = useState<any[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<Error | null>(null);
 
     const [input, setInput] = useState("");
     const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -27,33 +19,62 @@ export default function Chatbot() {
         setInput(e.target.value);
     };
 
+    const sendMessage = async (content: string) => {
+        if (!content.trim()) return;
+
+        const userMsg = { id: Date.now().toString(), role: 'user', content };
+        setMessages(prev => [...prev, userMsg]);
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ messages: [...messages, userMsg] }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            // Create placeholder for bot message
+            const botMsgId = (Date.now() + 1).toString();
+            setMessages(prev => [...prev, { id: botMsgId, role: 'assistant', content: '' }]);
+
+            const reader = response.body?.getReader();
+            if (!reader) throw new Error("No reader available");
+
+            const decoder = new TextDecoder();
+            let botContent = '';
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                const chunk = decoder.decode(value, { stream: true });
+                botContent += chunk;
+
+                // Simple update for now - in a real app we might want to debounce this
+                setMessages(prev => prev.map(m =>
+                    m.id === botMsgId ? { ...m, content: botContent } : m
+                ));
+            }
+        } catch (err) {
+            console.error("Chat error:", err);
+            setError(err as Error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     const handleSubmit = async (e?: React.FormEvent) => {
         e?.preventDefault();
         if (!input.trim()) return;
 
-        const userMessage = input;
-        setInput(""); // Clear input immediately
-
-        try {
-            const messageData = {
-                role: "user",
-                content: userMessage,
-            };
-
-            // Prefer append if available, otherwise sendMessage
-            if (typeof append === 'function') {
-                console.log("Using append...");
-                await append(messageData);
-            } else if (typeof sendMessage === 'function') {
-                console.log("Using sendMessage...");
-                await sendMessage(messageData);
-            } else {
-                console.error("No send method available!");
-                alert("Mesaj gönderme fonksiyonu bulunamadı.");
-            }
-        } catch (err) {
-            console.error("Failed to send message:", err);
-        }
+        const value = input;
+        setInput(""); // Clear input
+        await sendMessage(value);
     };
 
     // Auto-scroll to bottom
@@ -107,10 +128,7 @@ export default function Chatbot() {
                                             onClick={() => {
                                                 const value = "Üyelik şartları nelerdir?";
                                                 setInput(value);
-                                                // Trigger send manually
-                                                const messageData = { role: "user", content: value };
-                                                if (typeof append === 'function') append(messageData);
-                                                else if (typeof sendMessage === 'function') sendMessage(messageData);
+                                                sendMessage(value);
                                             }}
                                             className="text-xs bg-white/5 hover:bg-white/10 border border-white/10 rounded-full px-3 py-1 transition-colors"
                                         >
@@ -120,10 +138,7 @@ export default function Chatbot() {
                                             onClick={() => {
                                                 const value = "Komisyonlar hakkında bilgi ver.";
                                                 setInput(value);
-                                                // Trigger send manually
-                                                const messageData = { role: "user", content: value };
-                                                if (typeof append === 'function') append(messageData);
-                                                else if (typeof sendMessage === 'function') sendMessage(messageData);
+                                                sendMessage(value);
                                             }}
                                             className="text-xs bg-white/5 hover:bg-white/10 border border-white/10 rounded-full px-3 py-1 transition-colors"
                                         >
