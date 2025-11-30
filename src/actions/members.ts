@@ -10,7 +10,8 @@ export async function getMembers(query?: string, company?: string) {
         .from("members")
         .select("*")
         .select("*")
-        .order("display_order", { ascending: true });
+        .order("display_order", { ascending: true })
+        .order("name", { ascending: true });
 
     if (query) {
         dbQuery = dbQuery.ilike("name", `%${query}%`);
@@ -41,7 +42,9 @@ export async function addMember(formData: FormData) {
 
     if (imageFile && imageFile.size > 0) {
         try {
-            const filename = `${Date.now()}-${imageFile.name.replace(/\s/g, "-")}`;
+            // Sanitize filename: use timestamp + random string + extension
+            const extension = imageFile.name.split('.').pop() || 'png';
+            const filename = `${Date.now()}-${Math.random().toString(36).substring(7)}.${extension}`;
             const { data, error } = await supabase.storage
                 .from("images")
                 .upload(filename, imageFile, {
@@ -112,7 +115,9 @@ export async function updateMember(id: string, formData: FormData) {
 
     if (imageFile && imageFile.size > 0) {
         try {
-            const filename = `${Date.now()}-${imageFile.name.replace(/\s/g, "-")}`;
+            // Sanitize filename: use timestamp + random string + extension
+            const extension = imageFile.name.split('.').pop() || 'png';
+            const filename = `${Date.now()}-${Math.random().toString(36).substring(7)}.${extension}`;
             const { data, error } = await supabase.storage
                 .from("images")
                 .upload(filename, imageFile, {
