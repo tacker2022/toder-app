@@ -81,3 +81,70 @@ export async function deleteAssociation(id: string) {
     revalidatePath("/admin/associations");
     revalidatePath("/");
 }
+
+export async function getAssociation(id: string) {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+        .from("associations")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+    if (error) {
+        console.error("Error fetching association:", error);
+        return null;
+    }
+
+    return data;
+}
+
+export async function updateAssociation(id: string, formData: FormData) {
+    const supabase = await createClient();
+    const name = formData.get("name") as string;
+    const website_url = formData.get("website_url") as string;
+    const imageFile = formData.get("image") as File;
+
+    const updates: any = {
+        name,
+        website_url,
+    };
+
+    if (imageFile && imageFile.size > 0) {
+        try {
+            // Sanitize filename: use timestamp + random string + extension
+            const extension = imageFile.name.split('.').pop() || 'png';
+            const filename = `assoc-${Date.now()}-${Math.random().toString(36).substring(7)}.${extension}`;
+            const { data, error } = await supabase.storage
+                .from("images")
+                .upload(filename, imageFile, {
+                    cacheControl: "3600",
+                    upsert: false,
+                });
+
+            if (error) throw error;
+
+            const { data: publicUrlData } = supabase.storage
+                .from("images")
+                .getPublicUrl(filename);
+
+            updates.image_url = publicUrlData.publicUrl;
+        } catch (imageError) {
+            console.error("Failed to upload association image:", imageError);
+            return { error: `Upload Error: ${(imageError as Error).message}` };
+        }
+    }
+
+    const { error } = await supabase
+        .from("associations")
+        .update(updates)
+        .eq("id", id);
+
+    if (error) {
+        console.error("Error updating association:", error);
+        return { error: `Database Error: ${error.message}` };
+    }
+
+    revalidatePath("/admin/associations");
+    revalidatePath("/");
+    return { success: true };
+}

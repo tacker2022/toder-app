@@ -1,5 +1,5 @@
 import { getAssociations, deleteAssociation } from "@/actions/associations";
-import { Plus, Trash2, ExternalLink } from "lucide-react";
+import { Plus, Trash2, ExternalLink, Pencil } from "lucide-react";
 import Link from "next/link";
 
 export default async function AdminAssociationsPage() {
@@ -47,15 +47,24 @@ export default async function AdminAssociationsPage() {
                             </div>
                         </div>
 
-                        <form action={deleteAssociation.bind(null, assoc.id)}>
-                            <button
-                                type="submit"
-                                className="p-2 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
-                                title="Sil"
+                        <div className="flex items-center gap-2">
+                            <Link
+                                href={`/admin/associations/${assoc.id}`}
+                                className="p-2 text-blue-400 hover:bg-blue-500/10 rounded-lg transition-colors"
+                                title="Düzenle"
                             >
-                                <Trash2 size={20} />
-                            </button>
-                        </form>
+                                <Pencil size={20} />
+                            </Link>
+                            <form action={deleteAssociation.bind(null, assoc.id)}>
+                                <button
+                                    type="submit"
+                                    className="p-2 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+                                    title="Sil"
+                                >
+                                    <Trash2 size={20} />
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 ))}
 
