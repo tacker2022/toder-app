@@ -24,7 +24,7 @@ export default function Management({ members }: { members: Member[] }) {
                             key={member.id}
                             className="member-card glass-card"
                             initial={{ opacity: 0, scale: 0.9 }}
-                            initial={{ opacity: 0, scale: 0.9 }}
+
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
                         >

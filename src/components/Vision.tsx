@@ -32,7 +32,7 @@ export default function Vision() {
                             key={index}
                             className="card glass-card"
                             initial={{ opacity: 0, y: 30 }}
-                            initial={{ opacity: 0, y: 30 }}
+
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: index * 0.2 }}
                             whileHover={{ y: -10 }}

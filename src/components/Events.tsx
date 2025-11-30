@@ -30,7 +30,7 @@ export default function Events({ events }: { events: Event[] }) {
                                 key={event.id}
                                 className="event-card glass-card"
                                 initial={{ opacity: 0, x: 20 }}
-                                initial={{ opacity: 0, x: 20 }}
+
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                             >
