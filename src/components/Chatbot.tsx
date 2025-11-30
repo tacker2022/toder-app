@@ -7,12 +7,17 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Chatbot() {
     const [isOpen, setIsOpen] = useState(false);
-    const { messages, append, isLoading, error } = useChat({
-
+    const chatHelpers = useChat({
         onError: (err) => {
             console.error("Chat error:", err);
         }
     }) as any;
+
+    const { messages, append, isLoading, error } = chatHelpers;
+
+    useEffect(() => {
+        console.log("useChat helpers:", chatHelpers);
+    }, [chatHelpers]);
     const [input, setInput] = useState("");
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
