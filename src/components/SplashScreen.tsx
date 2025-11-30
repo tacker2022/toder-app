@@ -15,10 +15,10 @@ export default function SplashScreen({ members }: { members: Member[] }) {
     const [isVisible, setIsVisible] = useState(true);
 
     useEffect(() => {
-        // Hide splash screen after 4 seconds (slightly longer to read names)
+        // Hide splash screen after 6 seconds
         const timer = setTimeout(() => {
             setIsVisible(false);
-        }, 4000);
+        }, 6000);
 
         return () => clearTimeout(timer);
     }, []);
@@ -113,7 +113,7 @@ export default function SplashScreen({ members }: { members: Member[] }) {
                             className="h-full bg-[#D4AF37]"
                             initial={{ width: "0%" }}
                             animate={{ width: "100%" }}
-                            transition={{ duration: 3.5, ease: "easeInOut", delay: 0.5 }}
+                            transition={{ duration: 5.5, ease: "easeInOut", delay: 0.5 }}
                         />
                     </motion.div>
                 </motion.div>
