@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/react";
+import Chatbot from "@/components/Chatbot";
 import Script from "next/script";
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
@@ -102,6 +103,8 @@ export default function RootLayout({
             gtag('config', 'G-YZ2TXWFEV0');
           `}
         </Script>
+        <Chatbot />
+        <Analytics />
       </body>
     </html>
   );
