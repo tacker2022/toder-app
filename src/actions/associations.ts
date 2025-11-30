@@ -28,7 +28,9 @@ export async function addAssociation(formData: FormData) {
 
     if (imageFile && imageFile.size > 0) {
         try {
-            const filename = `assoc-${Date.now()}-${imageFile.name.replace(/\s/g, "-")}`;
+            // Sanitize filename: use timestamp + random string + extension
+            const extension = imageFile.name.split('.').pop() || 'png';
+            const filename = `assoc-${Date.now()}-${Math.random().toString(36).substring(7)}.${extension}`;
             const { data, error } = await supabase.storage
                 .from("images")
                 .upload(filename, imageFile, {
