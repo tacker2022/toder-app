@@ -12,6 +12,7 @@ import { getMembers } from "@/actions/members";
 import BlogSection from "@/components/BlogSection";
 import Associations from "@/components/Associations";
 import Videos from "@/components/Videos";
+import SplashScreen from "@/components/SplashScreen";
 
 export default async function Home() {
   const events = await getEvents();
@@ -19,7 +20,7 @@ export default async function Home() {
 
   return (
     <main>
-      <Navbar />
+      <SplashScreen />
       <Hero />
       <Vision />
       <Management members={members} />
