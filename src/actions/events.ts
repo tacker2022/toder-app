@@ -66,6 +66,61 @@ export async function addEvent(formData: FormData) {
     revalidatePath("/");
 }
 
+revalidatePath("/admin/events");
+revalidatePath("/");
+}
+
+export async function updateEvent(id: string, formData: FormData) {
+    const supabase = await createClient();
+    const title = formData.get("title") as string;
+    const date = formData.get("date") as string;
+    const description = formData.get("description") as string;
+    const imageFile = formData.get("image") as File;
+
+    const updates: any = {
+        title,
+        date,
+        description,
+    };
+
+    if (imageFile && imageFile.size > 0) {
+        try {
+            const filename = `${Date.now()}-${imageFile.name.replace(/\s/g, "-")}`;
+            const { data, error } = await supabase.storage
+                .from("images")
+                .upload(filename, imageFile, {
+                    cacheControl: "3600",
+                    upsert: false,
+                });
+
+            if (error) throw error;
+
+            const { data: publicUrlData } = supabase.storage
+                .from("images")
+                .getPublicUrl(filename);
+
+            updates.image_url = publicUrlData.publicUrl;
+        } catch (imageError) {
+            console.error("Failed to upload event image:", imageError);
+            return { error: "Görsel yüklenirken hata oluştu." };
+        }
+    }
+
+    const { error } = await supabase
+        .from("events")
+        .update(updates)
+        .eq("id", id);
+
+    if (error) {
+        console.error("Error updating event:", error);
+        return { error: `Database Error: ${error.message}` };
+    }
+
+    revalidatePath("/admin/events");
+    revalidatePath("/");
+    return { success: true };
+}
+
 export async function deleteEvent(id: string) {
     const supabase = await createClient();
     const { error } = await supabase.from("events").delete().eq("id", id);
@@ -77,4 +132,20 @@ export async function deleteEvent(id: string) {
 
     revalidatePath("/admin/events");
     revalidatePath("/");
+}
+
+export async function getEventById(id: string) {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+        .from("events")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+    if (error) {
+        console.error("Error fetching event:", error);
+        return null;
+    }
+
+    return data;
 }

@@ -1,11 +1,14 @@
 import { getEvents, addEvent, deleteEvent } from "@/actions/events";
-import { Trash2, Plus } from "lucide-react";
+import Toast from "@/components/ui/Toast";
+import { Trash2, Plus, Pencil } from "lucide-react";
+import Link from "next/link";
 
 export default async function EventsPage() {
     const events = await getEvents();
 
     return (
         <div>
+            <Toast />
             <h1 className="text-3xl font-bold mb-8">Etkinlik Yönetimi</h1>
 
             {/* Add Event Form */}
@@ -61,14 +64,23 @@ export default async function EventsPage() {
                             <p className="text-gray-400 text-sm mb-1">{event.date}</p>
                             <p className="text-gray-300">{event.description}</p>
                         </div>
-                        <form action={deleteEvent.bind(null, event.id)}>
-                            <button
-                                type="submit"
-                                className="p-2 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+                        <div className="flex items-center gap-2">
+                            <Link
+                                href={`/admin/events/${event.id}`}
+                                className="p-2 text-white/50 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                                title="Düzenle"
                             >
-                                <Trash2 size={20} />
-                            </button>
-                        </form>
+                                <Pencil size={20} />
+                            </Link>
+                            <form action={deleteEvent.bind(null, event.id)}>
+                                <button
+                                    type="submit"
+                                    className="p-2 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+                                >
+                                    <Trash2 size={20} />
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 ))}
             </div>
