@@ -43,6 +43,8 @@ export async function createPost(formData: FormData) {
     const imageFile = formData.get("image") as File;
     const dateStr = formData.get("date") as string;
 
+    const galleryFiles = formData.getAll("gallery") as File[];
+
     // Create slug from title
     const slug = title
         .toLowerCase()
@@ -73,24 +75,50 @@ export async function createPost(formData: FormData) {
         }
     }
 
-    const { error } = await supabase.from("posts").insert({
+    const { data: postData, error } = await supabase.from("posts").insert({
         title,
         slug,
         content,
         image_url,
         published: true,
         created_at: dateStr ? new Date(dateStr).toISOString() : new Date().toISOString()
-    });
+    }).select().single();
 
     if (error) {
         console.error("Error creating post:", error);
         throw new Error(`Failed to create post: ${error.message}`);
     }
 
+    // Handle Gallery Uploads
+    if (galleryFiles && galleryFiles.length > 0) {
+        for (const file of galleryFiles) {
+            if (file.size > 0) {
+                try {
+                    const filename = `gallery-${Date.now()}-${Math.random().toString(36).substring(7)}-${file.name.replace(/\s/g, "-")}`;
+                    const { error: uploadError } = await supabase.storage
+                        .from("images")
+                        .upload(filename, file);
+
+                    if (!uploadError) {
+                        const { data: { publicUrl } } = supabase.storage
+                            .from("images")
+                            .getPublicUrl(filename);
+
+                        await supabase.from("gallery_images").insert({
+                            post_id: postData.id,
+                            image_url: publicUrl
+                        });
+                    }
+                } catch (e) {
+                    console.error("Gallery upload error:", e);
+                }
+            }
+        }
+    }
+
     revalidatePath("/blog");
     revalidatePath("/admin/posts");
     revalidatePath("/");
-    revalidatePath("/blog");
 
     return { success: true };
 }
@@ -102,6 +130,8 @@ export async function updatePost(id: string, formData: FormData) {
     const content = formData.get("content") as string;
     const imageFile = formData.get("image") as File;
     const dateStr = formData.get("date") as string;
+
+    const galleryFiles = formData.getAll("gallery") as File[];
 
     const updates: any = {
         title,
@@ -148,6 +178,33 @@ export async function updatePost(id: string, formData: FormData) {
     if (error) {
         console.error("Error updating post:", error);
         return { error: `Database Error: ${error.message}` };
+    }
+
+    // Handle Gallery Uploads
+    if (galleryFiles && galleryFiles.length > 0) {
+        for (const file of galleryFiles) {
+            if (file.size > 0) {
+                try {
+                    const filename = `gallery-${Date.now()}-${Math.random().toString(36).substring(7)}-${file.name.replace(/\s/g, "-")}`;
+                    const { error: uploadError } = await supabase.storage
+                        .from("images")
+                        .upload(filename, file);
+
+                    if (!uploadError) {
+                        const { data: { publicUrl } } = supabase.storage
+                            .from("images")
+                            .getPublicUrl(filename);
+
+                        await supabase.from("gallery_images").insert({
+                            post_id: id,
+                            image_url: publicUrl
+                        });
+                    }
+                } catch (e) {
+                    console.error("Gallery upload error:", e);
+                }
+            }
+        }
     }
 
     revalidatePath("/admin/posts");

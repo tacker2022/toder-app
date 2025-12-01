@@ -90,6 +90,17 @@ export default function NewPostPage() {
                     </div>
 
                     <div>
+                        <label className="block text-sm text-white/50 mb-2">Galeri Görselleri (Çoklu Seçim)</label>
+                        <input
+                            type="file"
+                            name="gallery"
+                            accept="image/*"
+                            multiple
+                            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37]"
+                        />
+                    </div>
+
+                    <div>
                         <label className="block text-sm text-white/50 mb-2">İçerik</label>
                         <textarea
                             name="content"

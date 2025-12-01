@@ -37,6 +37,16 @@ export default async function EventsPage() {
                         accept="image/*"
                         className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#D4AF37] md:col-span-2"
                     />
+                    <div className="md:col-span-2">
+                        <label className="block text-sm text-white/50 mb-1">Galeri Görselleri (Çoklu Seçim)</label>
+                        <input
+                            type="file"
+                            name="gallery"
+                            accept="image/*"
+                            multiple
+                            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#D4AF37]"
+                        />
+                    </div>
                     <textarea
                         name="description"
                         placeholder="Açıklama"

@@ -1,7 +1,8 @@
 "use client";
 
 import { updateEvent, getEventById } from "@/actions/events";
-import { Save, ArrowLeft, AlertCircle } from "lucide-react";
+import { getGalleryImages, deleteGalleryImage } from "@/actions/gallery";
+import { Save, ArrowLeft, AlertCircle, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -12,17 +13,27 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const [event, setEvent] = useState<any>(null);
+    const [galleryImages, setGalleryImages] = useState<any[]>([]);
     const router = useRouter();
 
     useEffect(() => {
         getEventById(resolvedParams.id).then((data) => {
             if (data) {
                 setEvent(data);
+                // Fetch gallery images
+                getGalleryImages(data.id).then(setGalleryImages);
             } else {
                 setError("Etkinlik bulunamadı.");
             }
         });
     }, [resolvedParams.id]);
+
+    const handleDeleteImage = async (imageId: string) => {
+        if (confirm("Bu görseli silmek istediğinize emin misiniz?")) {
+            await deleteGalleryImage(imageId);
+            setGalleryImages(prev => prev.filter(img => img.id !== imageId));
+        }
+    };
 
     async function handleSubmit(formData: FormData) {
         setLoading(true);
@@ -98,6 +109,37 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
                             accept="image/*"
                             className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37]"
                         />
+                    </div>
+
+                    <div>
+                        <label className="block text-sm text-white/50 mb-2">Galeri Görselleri (Yeni Ekle)</label>
+                        <input
+                            type="file"
+                            name="gallery"
+                            accept="image/*"
+                            multiple
+                            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37]"
+                        />
+
+                        {galleryImages.length > 0 && (
+                            <div className="mt-4">
+                                <label className="block text-sm text-white/50 mb-2">Mevcut Galeri</label>
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                    {galleryImages.map((img: any) => (
+                                        <div key={img.id} className="relative group">
+                                            <img src={img.image_url} alt="Gallery" className="w-full h-24 object-cover rounded-lg border border-white/10" />
+                                            <button
+                                                type="button"
+                                                onClick={() => handleDeleteImage(img.id)}
+                                                className="absolute top-1 right-1 bg-red-500/80 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                                            >
+                                                <Trash2 size={14} />
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                     <div>
