@@ -66,9 +66,7 @@ export async function addEvent(formData: FormData) {
     revalidatePath("/");
 }
 
-revalidatePath("/admin/events");
-revalidatePath("/");
-}
+
 
 export async function updateEvent(id: string, formData: FormData) {
     const supabase = await createClient();
