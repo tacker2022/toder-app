@@ -1,5 +1,6 @@
 import { getVideos, deleteVideo } from "@/actions/videos";
-import { Plus, Trash2, ExternalLink, Video } from "lucide-react";
+import Toast from "@/components/ui/Toast";
+import { Plus, Trash2, ExternalLink, Video, Pencil } from "lucide-react";
 import Link from "next/link";
 import { getYouTubeID } from "@/utils/youtube";
 
@@ -8,6 +9,7 @@ export default async function AdminVideosPage() {
 
     return (
         <div>
+            <Toast />
             <div className="flex justify-between items-center mb-8">
                 <h1 className="text-3xl font-bold">Video Galeri</h1>
                 <Link
@@ -58,15 +60,24 @@ export default async function AdminVideosPage() {
                                     <span className="text-xs text-white/30">
                                         {new Date(video.created_at).toLocaleDateString("tr-TR")}
                                     </span>
-                                    <form action={deleteVideo.bind(null, video.id)}>
-                                        <button
-                                            type="submit"
-                                            className="p-2 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
-                                            title="Sil"
+                                    <div className="flex items-center gap-2">
+                                        <Link
+                                            href={`/admin/videos/${video.id}`}
+                                            className="p-2 text-white/50 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                                            title="Düzenle"
                                         >
-                                            <Trash2 size={20} />
-                                        </button>
-                                    </form>
+                                            <Pencil size={20} />
+                                        </Link>
+                                        <form action={deleteVideo.bind(null, video.id)}>
+                                            <button
+                                                type="submit"
+                                                className="p-2 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+                                                title="Sil"
+                                            >
+                                                <Trash2 size={20} />
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>

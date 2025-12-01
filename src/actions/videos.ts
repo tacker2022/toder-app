@@ -47,6 +47,34 @@ export async function addVideo(formData: FormData) {
     return { success: true };
 }
 
+export async function updateVideo(id: string, formData: FormData) {
+    const supabase = await createClient();
+    const title = formData.get("title") as string;
+    const youtube_url = formData.get("youtube_url") as string;
+
+    if (!title || !youtube_url) {
+        return { error: "Başlık ve YouTube linki zorunludur." };
+    }
+
+    if (!youtube_url.includes("youtube.com") && !youtube_url.includes("youtu.be")) {
+        return { error: "Geçerli bir YouTube linki giriniz." };
+    }
+
+    const { error } = await supabase
+        .from("videos")
+        .update({ title, youtube_url })
+        .eq("id", id);
+
+    if (error) {
+        console.error("Error updating video:", error);
+        return { error: `Database Error: ${error.message}` };
+    }
+
+    revalidatePath("/admin/videos");
+    revalidatePath("/");
+    return { success: true };
+}
+
 export async function deleteVideo(id: string) {
     const supabase = await createClient();
     const { error } = await supabase.from("videos").delete().eq("id", id);
@@ -58,6 +86,22 @@ export async function deleteVideo(id: string) {
 
     revalidatePath("/admin/videos");
     revalidatePath("/");
+}
+
+export async function getVideoById(id: string) {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+        .from("videos")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+    if (error) {
+        console.error("Error fetching video:", error);
+        return null;
+    }
+
+    return data;
 }
 
 

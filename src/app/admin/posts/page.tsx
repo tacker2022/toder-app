@@ -1,6 +1,6 @@
 import { deletePost, getPosts } from "@/actions/posts";
-
-import { Plus, Trash2, Eye, Calendar } from "lucide-react";
+import Toast from "@/components/ui/Toast";
+import { Plus, Trash2, Eye, Calendar, Pencil } from "lucide-react";
 import Link from "next/link";
 
 export default async function AdminPostsPage() {
@@ -8,6 +8,7 @@ export default async function AdminPostsPage() {
 
     return (
         <div>
+            <Toast />
             <div className="flex justify-between items-center mb-8">
                 <h1 className="text-3xl font-bold">Haberler & Duyurular</h1>
                 <Link
@@ -48,6 +49,13 @@ export default async function AdminPostsPage() {
                         </div>
 
                         <div className="flex items-center gap-2">
+                            <Link
+                                href={`/admin/posts/${post.id}`}
+                                className="p-2 text-white/50 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                                title="Düzenle"
+                            >
+                                <Pencil size={20} />
+                            </Link>
                             <Link
                                 href={`/blog/${post.slug}`}
                                 target="_blank"
