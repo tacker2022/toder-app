@@ -41,6 +41,7 @@ export async function createPost(formData: FormData) {
     const title = formData.get("title") as string;
     const content = formData.get("content") as string;
     const imageFile = formData.get("image") as File;
+    const dateStr = formData.get("date") as string;
 
     // Create slug from title
     const slug = title
@@ -77,7 +78,8 @@ export async function createPost(formData: FormData) {
         slug,
         content,
         image_url,
-        published: true
+        published: true,
+        created_at: dateStr ? new Date(dateStr).toISOString() : new Date().toISOString()
     });
 
     if (error) {
@@ -99,6 +101,7 @@ export async function updatePost(id: string, formData: FormData) {
     const title = formData.get("title") as string;
     const content = formData.get("content") as string;
     const imageFile = formData.get("image") as File;
+    const dateStr = formData.get("date") as string;
 
     const updates: any = {
         title,
@@ -110,6 +113,10 @@ export async function updatePost(id: string, formData: FormData) {
             .replace(/[^a-z0-9]+/g, "-")
             .replace(/(^-|-$)+/g, ""),
     };
+
+    if (dateStr) {
+        updates.created_at = new Date(dateStr).toISOString();
+    }
 
     if (imageFile && imageFile.size > 0) {
         // Upload new image
