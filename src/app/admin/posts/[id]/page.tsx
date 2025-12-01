@@ -86,15 +86,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
                         />
                     </div>
 
-                    <div>
-                        <label className="block text-sm text-white/50 mb-2">Tarih</label>
-                        <input
-                            type="date"
-                            name="date"
-                            defaultValue={post?.created_at ? new Date(post.created_at).toISOString().split('T')[0] : ''}
-                            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37]"
-                        />
-                    </div>
+
 
                     <div>
                         <label className="block text-sm text-white/50 mb-2">Kapak Görseli (Değiştirmek için seçin)</label>
