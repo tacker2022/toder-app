@@ -3,7 +3,7 @@
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 
-export async function getMembers(query?: string, company?: string) {
+export async function getMembers(query?: string, company?: string, type: string = "board") {
     const supabase = await createClient();
 
     let dbQuery = supabase
@@ -21,6 +21,8 @@ export async function getMembers(query?: string, company?: string) {
         dbQuery = dbQuery.eq("company", company);
     }
 
+    dbQuery = dbQuery.eq("type", type);
+
     const { data, error } = await dbQuery;
 
     if (error) {
@@ -35,6 +37,7 @@ export async function addMember(formData: FormData) {
     const supabase = await createClient();
     const name = formData.get("name") as string;
     const role = formData.get("role") as string;
+    const type = formData.get("type") as string || "board";
     const display_order = parseInt(formData.get("display_order") as string) || 0;
     const imageFile = formData.get("image") as File;
 
@@ -68,6 +71,7 @@ export async function addMember(formData: FormData) {
     const { error } = await supabase.from("members").insert({
         name,
         role,
+        type,
         company: formData.get("company") as string,
         display_order,
         image_url: imageUrl,
@@ -102,6 +106,7 @@ export async function updateMember(id: string, formData: FormData) {
     const supabase = await createClient();
     const name = formData.get("name") as string;
     const role = formData.get("role") as string;
+    const type = formData.get("type") as string || "board";
     const company = formData.get("company") as string;
     const display_order = parseInt(formData.get("display_order") as string) || 0;
     const imageFile = formData.get("image") as File;
@@ -109,6 +114,7 @@ export async function updateMember(id: string, formData: FormData) {
     const updates: any = {
         name,
         role,
+        type,
         company,
         display_order,
     };

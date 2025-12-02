@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Vision from "@/components/Vision";
 import Management from "@/components/Management";
+import SupervisoryBoard from "@/components/SupervisoryBoard";
 import Commissions from "@/components/Commissions";
 import Events from "@/components/Events";
 import CTA from "@/components/CTA";
@@ -17,7 +18,8 @@ import SplashScreen from "@/components/SplashScreen";
 
 export default async function Home() {
   const events = await getEvents();
-  const members = await getMembers();
+  const members = await getMembers(undefined, undefined, "board");
+  const supervisoryMembers = await getMembers(undefined, undefined, "supervisory");
 
   return (
     <main>
@@ -25,6 +27,7 @@ export default async function Home() {
       <Hero />
       <Vision />
       <Management members={members} />
+      <SupervisoryBoard members={supervisoryMembers} />
       <Commissions />
       <Events events={events} />
       <Videos />
