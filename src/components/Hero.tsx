@@ -38,12 +38,13 @@ export default function Hero() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="mb-8"
+                    className="mb-8 relative inline-block"
                 >
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-white/10 blur-[50px] rounded-full -z-10"></div>
                     <img
                         src="/toder-logo.png"
                         alt="TODER Logo"
-                        className="h-32 md:h-40 mx-auto drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+                        className="h-32 md:h-40 mx-auto drop-shadow-[0_0_25px_rgba(255,255,255,0.4)]"
                     />
                 </motion.div>
                 <motion.p
