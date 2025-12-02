@@ -11,6 +11,7 @@ import { getEvents } from "@/actions/events";
 import { getMembers } from "@/actions/members";
 import BlogSection from "@/components/BlogSection";
 import Associations from "@/components/Associations";
+import Contact from "@/components/Contact";
 import Videos from "@/components/Videos";
 import SplashScreen from "@/components/SplashScreen";
 
@@ -29,6 +30,7 @@ export default async function Home() {
       <Videos />
       <BlogSection />
       <Associations />
+      <Contact />
       <CTA />
       <Footer />
     </main>

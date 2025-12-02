@@ -20,7 +20,7 @@ export default function Associations() {
     return (
         <section className="py-12 bg-black border-t border-white/10 overflow-hidden">
             <div className="container mx-auto px-4 mb-8 text-center">
-                <h2 className="text-2xl font-bold text-white/50 uppercase tracking-widest">Üye Dernekler</h2>
+                <h2 className="text-2xl font-bold text-white/50 uppercase tracking-widest">Üye Kuruluşlar</h2>
             </div>
 
             <div className="relative flex overflow-x-hidden">
