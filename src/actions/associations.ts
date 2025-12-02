@@ -8,7 +8,7 @@ export async function getAssociations() {
     const { data, error } = await supabase
         .from("associations")
         .select("*")
-        .select("*")
+
         .order("order_index", { ascending: true })
         .order("created_at", { ascending: false });
 
@@ -24,6 +24,7 @@ export async function addAssociation(formData: FormData) {
     const supabase = await createClient();
     const name = formData.get("name") as string;
     const website_url = formData.get("website_url") as string;
+    const order_index = parseInt(formData.get("order_index") as string) || 0;
     const imageFile = formData.get("image") as File;
 
     let imageUrl = "";
