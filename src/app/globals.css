@@ -145,11 +145,11 @@ a {
 }
 
 .animate-marquee {
-  animation: marquee 25s linear infinite;
+  animation: marquee 50s linear infinite;
 }
 
 .animate-marquee2 {
-  animation: marquee2 25s linear infinite;
+  animation: marquee2 50s linear infinite;
 }
 
 .nav-links {
