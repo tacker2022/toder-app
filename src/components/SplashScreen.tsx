@@ -70,36 +70,7 @@ export default function SplashScreen({ members }: { members: Member[] }) {
                             </motion.p>
                         </motion.div>
 
-                        {/* Board Members List */}
-                        <motion.div
-                            className="w-full border-t border-white/10 pt-6 mt-2"
-                            initial={{ opacity: 0, width: "0%" }}
-                            animate={{ opacity: 1, width: "100%" }}
-                            transition={{ delay: 1.2, duration: 0.8 }}
-                        >
-                            <motion.h3
-                                className="text-[#D4AF37] text-sm font-medium mb-4 uppercase tracking-widest"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 1.5 }}
-                            >
-                                Yönetim Kurulu
-                            </motion.h3>
 
-                            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-                                {members.map((member, index) => (
-                                    <motion.span
-                                        key={member.id}
-                                        className="text-white/80 text-xs md:text-sm font-light"
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: 1.8 + (index * 0.1), duration: 0.5 }}
-                                    >
-                                        {member.name}
-                                    </motion.span>
-                                ))}
-                            </div>
-                        </motion.div>
                     </div>
 
                     {/* Loading Line Animation */}
