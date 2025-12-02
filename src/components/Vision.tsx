@@ -8,7 +8,7 @@ export default function Vision() {
         <section id="vizyon" className="section vision-section">
             <div className="container">
                 <div className="section-header">
-                    <h2 className="section-title">Vizyon & Misyon</h2>
+                    <h2 className="section-title">Biz Kimiz?</h2>
                     <div className="section-line"></div>
                 </div>
 

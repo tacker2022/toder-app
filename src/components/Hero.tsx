@@ -69,7 +69,7 @@ export default function Hero() {
                     <a href="#uyelik" className="btn btn-primary">
                         Üyelik Başvurusu
                     </a>
-                    <a href="#hakkimizda" className="btn btn-outline">
+                    <a href="#vizyon" className="btn btn-outline">
                         Hakkımızda
                     </a>
                 </motion.div>
