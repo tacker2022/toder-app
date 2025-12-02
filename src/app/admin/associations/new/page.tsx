@@ -71,7 +71,18 @@ export default function NewAssociationPage() {
                     </div>
 
                     <div>
-                        <label className="block text-sm text-white/50 mb-1">Logo</label>
+                        <label className="block text-sm font-medium mb-2 text-gray-300">Sıralama (Öncelik)</label>
+                        <input
+                            type="number"
+                            name="order_index"
+                            defaultValue={0}
+                            className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg p-3 text-white focus:outline-none focus:border-[#D4AF37]"
+                        />
+                        <p className="text-xs text-white/50 mt-1">Düşük numara (örn: 1) en başta görünür.</p>
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium mb-2 text-gray-300">Logo Görseli</label>
                         <input
                             type="file"
                             name="image"

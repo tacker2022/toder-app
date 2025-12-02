@@ -8,7 +8,7 @@ export default async function AdminAssociationsPage() {
     return (
         <div>
             <div className="flex justify-between items-center mb-8">
-                <h1 className="text-3xl font-bold">Üye Dernekler</h1>
+                <h1 className="text-3xl font-bold">Üye Kuruluşlar</h1>
                 <Link
                     href="/admin/associations/new"
                     className="bg-[#D4AF37] text-black px-4 py-2 rounded-lg font-bold flex items-center gap-2 hover:bg-[#b8962e] transition-colors"

@@ -8,6 +8,7 @@ export async function getAssociations() {
     const { data, error } = await supabase
         .from("associations")
         .select("*")
+        .order("order_index", { ascending: true })
         .order("created_at", { ascending: false });
 
     if (error) {
@@ -56,6 +57,7 @@ export async function addAssociation(formData: FormData) {
     const { error } = await supabase.from("associations").insert({
         name,
         website_url,
+        order_index,
         image_url: imageUrl,
     });
 
@@ -102,11 +104,13 @@ export async function updateAssociation(id: string, formData: FormData) {
     const supabase = await createClient();
     const name = formData.get("name") as string;
     const website_url = formData.get("website_url") as string;
+    const order_index = parseInt(formData.get("order_index") as string) || 0;
     const imageFile = formData.get("image") as File;
 
     const updates: any = {
         name,
         website_url,
+        order_index,
     };
 
     if (imageFile && imageFile.size > 0) {
