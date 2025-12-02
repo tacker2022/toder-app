@@ -10,6 +10,20 @@ export default function Vision() {
                     <h2 className="section-title">Vizyon & Misyon</h2>
                     <div className="section-line"></div>
                 </div>
+
+                <motion.div
+                    className="max-w-4xl mx-auto text-center mb-16 text-lg text-white/80 leading-relaxed"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                >
+                    <p>
+                        Tiyatro Oyuncuları Derneği (TODER), Türkiye'deki özel tiyatroların sesi olmak, sanatın ve sanatçının haklarını korumak,
+                        tiyatro kültürünü yaygınlaştırmak ve gelecek nesillere aktarmak amacıyla kurulmuş köklü bir sivil toplum kuruluşudur.
+                        Sanatın birleştirici gücüne inanıyor, sahnelerin ışığını hep birlikte daha parlak yakmak için çalışıyoruz.
+                    </p>
+                </motion.div>
+
                 <div className="cards-grid">
                     {[
                         {
