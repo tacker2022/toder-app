@@ -104,7 +104,6 @@ export async function updateAssociation(id: string, formData: FormData) {
     const supabase = await createClient();
     const name = formData.get("name") as string;
     const website_url = formData.get("website_url") as string;
-    const order_index = parseInt(formData.get("order_index") as string) || 0;
     const imageFile = formData.get("image") as File;
 
     const updates: any = {
