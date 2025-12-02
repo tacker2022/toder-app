@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Cpu, Handshake, TrendingUp } from "lucide-react";
 
 export default function Vision() {
     return (
@@ -30,17 +31,17 @@ export default function Vision() {
                 <div className="cards-grid">
                     {[
                         {
-                            icon: "🚀",
+                            icon: <Cpu size={40} className="text-[#D4AF37]" />,
                             title: "Dijital Dönüşüm",
                             desc: "Sektörün dijital çağa adaptasyonunu hızlandıran yenilikçi çözümler ve stratejiler.",
                         },
                         {
-                            icon: "🤝",
+                            icon: <Handshake size={40} className="text-[#D4AF37]" />,
                             title: "Sektörel İşbirliği",
                             desc: "Paydaşlar arasında güçlü bağlar kurarak ortak akıl ve sinerji oluşturma.",
                         },
                         {
-                            icon: "🎓",
+                            icon: <TrendingUp size={40} className="text-[#D4AF37]" />,
                             title: "Eğitim & Gelişim",
                             desc: "Sürekli öğrenme kültürü ile profesyonel yetkinliklerin artırılması.",
                         },
