@@ -18,9 +18,12 @@ export default function Vision() {
                     transition={{ duration: 0.6 }}
                 >
                     <p>
-                        Tiyatro Oyuncuları Derneği (TODER), Türkiye'deki özel tiyatroların sesi olmak, sanatın ve sanatçının haklarını korumak,
-                        tiyatro kültürünü yaygınlaştırmak ve gelecek nesillere aktarmak amacıyla kurulmuş köklü bir sivil toplum kuruluşudur.
-                        Sanatın birleştirici gücüne inanıyor, sahnelerin ışığını hep birlikte daha parlak yakmak için çalışıyoruz.
+                        TODER (Tüm Otopark Entegratör Yatırımcı ve İşletmecileri Derneği), Türkiye’de otopark sektörünü ortak bir çatı altında toplayarak;
+                        teknoloji, standartlaşma ve sürdürülebilir işletmecilik alanlarında güçlü bir ekosistem oluşturmayı hedefleyen bağımsız bir sektörel birliktir.
+                        Otopark entegratörleri, yatırımcılar, işletmeciler ve teknoloji sağlayıcılarını aynı platformda buluşturan TODER, sektörün ihtiyaçlarını analiz ederek
+                        ortak çözümler üretir, mevzuat gelişimlerine liderlik eder ve tüm paydaşların daha verimli, şeffaf ve yenilikçi bir yapıda hizmet verebilmesi için çalışmalar yürütür.
+                        Türkiye’nin mobilite, planlı şehirler ve kentsel dönüşüm vizyonu doğrultusunda; modern otopark işletmeciliğinin geleceğini şekillendirmeyi ve
+                        akıllı şehir altyapısının güçlü bir parçası olmayı amaçlar.
                     </p>
                 </motion.div>
 

@@ -20,8 +20,9 @@ export async function POST(req: Request) {
             Bilgi Bankası:
             
             1. TODER Hakkında:
-            - TODER, otopark sektöründeki yatırımcı, işletmeci ve entegratörleri bir araya getiren bir sivil toplum kuruluşudur.
-            - Amacı, sektör standartlarını yükseltmek, sorunlara çözüm bulmak ve üyeler arası dayanışmayı artırmaktır.
+            - TODER (Tüm Otopark Entegratör Yatırımcı ve İşletmecileri Derneği), Türkiye’de otopark sektörünü ortak bir çatı altında toplayarak; teknoloji, standartlaşma ve sürdürülebilir işletmecilik alanlarında güçlü bir ekosistem oluşturmayı hedefleyen bağımsız bir sektörel birliktir.
+            - Otopark entegratörleri, yatırımcılar, işletmeciler ve teknoloji sağlayıcılarını aynı platformda buluşturan TODER, sektörün ihtiyaçlarını analiz ederek ortak çözümler üretir, mevzuat gelişimlerine liderlik eder ve tüm paydaşların daha verimli, şeffaf ve yenilikçi bir yapıda hizmet verebilmesi için çalışmalar yürütür.
+            - Türkiye’nin mobilite, planlı şehirler ve kentsel dönüşüm vizyonu doğrultusunda; modern otopark işletmeciliğinin geleceğini şekillendirmeyi ve akıllı şehir altyapısının güçlü bir parçası olmayı amaçlar.
 
             2. Üyelik Şartları:
             - Otopark işletmeciliği veya entegrasyonu alanında faaliyet gösteren bir kuruluş olmak.
