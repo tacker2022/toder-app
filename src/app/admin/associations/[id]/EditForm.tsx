@@ -51,6 +51,17 @@ export default function EditAssociationForm({ association }: { association: any 
 
                 <form action={handleSubmit} className="grid grid-cols-1 gap-4">
                     <div>
+                        <label className="block text-sm text-white/50 mb-1">Sıralama (Öncelik)</label>
+                        <input
+                            type="number"
+                            name="order_index"
+                            defaultValue={association.order_index || 0}
+                            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#D4AF37]"
+                        />
+                        <p className="text-xs text-white/30 mt-1">Düşük numara (örn: 1) en başta görünür.</p>
+                    </div>
+
+                    <div>
                         <label className="block text-sm text-white/50 mb-1">Dernek Adı</label>
                         <input
                             type="text"
