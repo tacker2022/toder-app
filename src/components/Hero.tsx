@@ -34,24 +34,18 @@ export default function Hero() {
                 <div className="grid-overlay"></div>
             </div>
             <div className="container hero-content">
-                <h1 className="hero-title">
-                    <motion.span
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="reveal-text block md:inline mr-4"
-                    >
-                        TODER
-                    </motion.span>
-                    <motion.span
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="reveal-text accent block md:inline"
-                    >
-                        Project
-                    </motion.span>
-                </h1>
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="mb-8"
+                >
+                    <img
+                        src="/toder-logo.png"
+                        alt="TODER Logo"
+                        className="h-32 md:h-40 mx-auto drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+                    />
+                </motion.div>
                 <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
