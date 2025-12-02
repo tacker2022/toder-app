@@ -18,7 +18,7 @@ export default function SplashScreen({ members }: { members: Member[] }) {
         // Hide splash screen after 6 seconds
         const timer = setTimeout(() => {
             setIsVisible(false);
-        }, 6000);
+        }, 3000);
 
         return () => clearTimeout(timer);
     }, []);
@@ -73,19 +73,14 @@ export default function SplashScreen({ members }: { members: Member[] }) {
 
                     </div>
 
-                    {/* Loading Line Animation */}
+                    {/* Loading Spinner */}
                     <motion.div
-                        className="absolute bottom-10 w-48 h-1 bg-white/10 rounded-full overflow-hidden"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.5 }}
+                        className="absolute bottom-20"
                     >
-                        <motion.div
-                            className="h-full bg-[#D4AF37]"
-                            initial={{ width: "0%" }}
-                            animate={{ width: "100%" }}
-                            transition={{ duration: 5.5, ease: "easeInOut", delay: 0.5 }}
-                        />
+                        <div className="w-8 h-8 border-2 border-white/10 border-t-[#D4AF37] rounded-full animate-spin" />
                     </motion.div>
                 </motion.div>
             )}
