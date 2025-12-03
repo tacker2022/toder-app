@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Calendar, Users, LogOut, FileText, Newspaper, Video, HelpCircle, Scale } from "lucide-react";
+import { LayoutDashboard, Calendar, Users, LogOut, FileText, Newspaper, Video, HelpCircle, Scale, Mail } from "lucide-react";
 import { signOut } from "@/actions/auth";
 
 export default function AdminSidebar() {
