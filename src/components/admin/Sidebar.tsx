@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Calendar, Users, LogOut, FileText, Newspaper, Video, HelpCircle } from "lucide-react";
+import { LayoutDashboard, Calendar, Users, LogOut, FileText, Newspaper, Video, HelpCircle, Scale } from "lucide-react";
 import { signOut } from "@/actions/auth";
 
 export default function AdminSidebar() {
@@ -70,6 +70,16 @@ export default function AdminSidebar() {
                 >
                     <HelpCircle size={20} />
                     S.S.S.
+                </Link>
+                <Link
+                    href="/admin/legislations"
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${pathname.startsWith("/admin/legislations")
+                        ? "bg-[#D4AF37] text-black font-medium"
+                        : "text-white/60 hover:bg-white/5 hover:text-white"
+                        }`}
+                >
+                    <Scale size={20} />
+                    Mevzuat
                 </Link>
 
                 <Link
