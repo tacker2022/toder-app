@@ -42,9 +42,9 @@ export default function Navbar() {
                     <a href="#etkinlikler">Etkinlikler</a>
                     <Link href="/faq">S.S.S.</Link>
                     <Link href="/legislation">Mevzuat</Link>
-                    <a href="#iletisim" className="btn btn-primary">
+                    <Link href="/basvuru" className="btn btn-primary">
                         Üye Ol
-                    </a>
+                    </Link>
                 </div>
             </div>
         </nav>

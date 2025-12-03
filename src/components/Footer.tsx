@@ -51,10 +51,10 @@ export default function Footer() {
                                 </a>
                             </li>
                             <li>
-                                <a href="/#iletisim" className="text-white/60 hover:text-[#D4AF37] transition-colors flex items-center gap-2 group">
+                                <Link href="/basvuru" className="text-white/60 hover:text-[#D4AF37] transition-colors flex items-center gap-2 group">
                                     <ChevronRight size={16} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                                     <span className="-ml-6 group-hover:ml-0 transition-all">Üyelik</span>
-                                </a>
+                                </Link>
                             </li>
                             <li>
                                 <Link href="/faq" className="text-white/60 hover:text-[#D4AF37] transition-colors flex items-center gap-2 group">
