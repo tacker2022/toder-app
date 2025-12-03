@@ -16,7 +16,7 @@ export default function Footer() {
                     <a href="#">Hakkımızda</a>
                     <a href="#">Üyelik</a>
                     <a href="#">İletişim</a>
-                    <a href="#">Gizlilik</a>
+                    <Link href="/kvkk">Gizlilik ve KVKK</Link>
                 </div>
             </div>
         </footer>
