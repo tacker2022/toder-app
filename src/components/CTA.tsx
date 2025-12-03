@@ -7,7 +7,7 @@ export default function CTA() {
             <div className="container cta-container">
                 <h2>TODER Project'e Katılın</h2>
                 <p>Sektörün geleceğini birlikte şekillendirelim.</p>
-                <Link href="/apply" className="btn btn-primary btn-large">
+                <Link href="/basvuru" className="btn btn-primary btn-large">
                     Başvuru Formu
                 </Link>
             </div>
