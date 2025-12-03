@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Calendar, Users, LogOut, FileText, Newspaper, Video } from "lucide-react";
+import { LayoutDashboard, Calendar, Users, LogOut, FileText, Newspaper, Video, HelpCircle } from "lucide-react";
 import { signOut } from "@/actions/auth";
 
 export default function AdminSidebar() {
@@ -51,6 +51,27 @@ export default function AdminSidebar() {
                     <Newspaper size={20} />
                     <span>Haberler</span>
                 </Link>
+                <Link
+                    href="/admin/events"
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${pathname.startsWith("/admin/events")
+                        ? "bg-[#D4AF37] text-black font-medium"
+                        : "text-white/60 hover:bg-white/5 hover:text-white"
+                        }`}
+                >
+                    <Calendar size={20} />
+                    Etkinlikler
+                </Link>
+                <Link
+                    href="/admin/faqs"
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${pathname.startsWith("/admin/faqs")
+                        ? "bg-[#D4AF37] text-black font-medium"
+                        : "text-white/60 hover:bg-white/5 hover:text-white"
+                        }`}
+                >
+                    <HelpCircle size={20} />
+                    S.S.S.
+                </Link>
+
                 <Link
                     href="/admin/videos"
                     className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${pathname.startsWith("/admin/videos")
