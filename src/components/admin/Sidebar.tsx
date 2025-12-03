@@ -103,6 +103,16 @@ export default function AdminSidebar() {
                     <FileText size={20} />
                     <span>Başvurular</span>
                 </Link>
+                <Link
+                    href="/admin/messages"
+                    className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${pathname === "/admin/messages"
+                        ? "bg-[#D4AF37] text-black font-medium"
+                        : "text-white/70 hover:bg-white/5 hover:text-white"
+                        }`}
+                >
+                    <Mail size={20} />
+                    <span>Mesajlar</span>
+                </Link>
             </nav>
             <div className="p-4 border-t border-white/10">
                 <form action={signOut}>
@@ -115,3 +125,4 @@ export default function AdminSidebar() {
         </aside>
     );
 }
+```
