@@ -15,6 +15,7 @@ export default function Footer() {
                 <div className="footer-links">
                     <a href="#">Hakkımızda</a>
                     <a href="#">Üyelik</a>
+                    <Link href="/faq">S.S.S.</Link>
                     <a href="#">İletişim</a>
                     <Link href="/kvkk">Gizlilik ve KVKK</Link>
                 </div>

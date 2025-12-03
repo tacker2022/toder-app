@@ -40,6 +40,7 @@ export default function Navbar() {
                     <a href="#yonetim">Yönetim</a>
                     <a href="#komisyonlar">Komisyonlar</a>
                     <a href="#etkinlikler">Etkinlikler</a>
+                    <Link href="/faq">S.S.S.</Link>
                     <a href="#iletisim" className="btn btn-primary">
                         Üye Ol
                     </a>
