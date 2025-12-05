@@ -149,9 +149,7 @@ export default function ImageCropper({ onCropComplete, aspectRatio = 16 / 9, lab
                     <div className="bg-[#111] p-6 rounded-2xl max-w-4xl w-full max-h-[90vh] flex flex-col">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="text-xl font-bold text-white">Önizleme Alanını Seç</h3>
-                            <button onClick={() => setImgSrc("")} className="text-white/50 hover:text-white">
-                                <X size={24} />
-                            </button>
+
                         </div>
                         <div className="flex-1 overflow-auto flex justify-center bg-black/50 rounded-lg p-4">
                             <ReactCrop
