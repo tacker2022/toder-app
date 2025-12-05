@@ -27,13 +27,12 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
                 <div className="bg-[#0a0a0a] border border-white/10 rounded-2xl overflow-hidden">
                     {/* Hero Image */}
                     {event.image_url && (
-                        <div className="w-full h-[400px] relative">
+                        <div className="w-full relative">
                             <img
                                 src={event.image_url}
                                 alt={event.title}
-                                className="w-full h-full object-cover"
+                                className="w-full h-auto object-contain"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-60"></div>
                         </div>
                     )}
 

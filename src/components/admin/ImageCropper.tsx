@@ -83,15 +83,15 @@ export default function ImageCropper({ onCropComplete, aspectRatio = 16 / 9, lab
                     reject(new Error("Canvas is empty"));
                     return;
                 }
-                const file = new File([blob], fileName, { type: "image/jpeg" });
+                const file = new File([blob], fileName, { type: "image/png" });
                 resolve(file);
-            }, "image/jpeg");
+            }, "image/png", 1.0);
         });
     }
 
     async function handleCrop() {
         if (imgRef.current && completedCrop) {
-            const croppedFile = await getCroppedImg(imgRef.current, completedCrop, "cropped-image.jpg");
+            const croppedFile = await getCroppedImg(imgRef.current, completedCrop, "cropped-image.png");
             onCropComplete(croppedFile);
             setCroppedPreviewUrl(URL.createObjectURL(croppedFile));
             setImgSrc(""); // Close cropper view
