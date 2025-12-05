@@ -8,7 +8,10 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { use } from "react";
+import { useRouter } from "next/navigation";
+import { use } from "react";
 import ImageCropper from "@/components/admin/ImageCropper";
+import { createClient } from "@/utils/supabase/client";
 
 export default function EditEventPage({ params }: { params: Promise<{ id: string }> }) {
     const resolvedParams = use(params);
@@ -43,10 +46,45 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
         setLoading(true);
         setError(null);
 
-        if (mainImage) formData.set("image", mainImage);
-        if (listImage) formData.set("list_image", listImage);
-
         try {
+            const supabase = createClient();
+
+            // Upload Main Image
+            let imageUrl = "";
+            if (mainImage) {
+                const filename = `${Date.now()}-${mainImage.name.replace(/[^a-zA-Z0-9.-]/g, "-")}`;
+                const { error } = await supabase.storage
+                    .from("images")
+                    .upload(filename, mainImage);
+
+                if (error) throw error;
+
+                const { data } = supabase.storage
+                    .from("images")
+                    .getPublicUrl(filename);
+                imageUrl = data.publicUrl;
+            }
+
+            // Upload List Image
+            let listImageUrl = "";
+            if (listImage) {
+                const filename = `list-${Date.now()}-${listImage.name.replace(/[^a-zA-Z0-9.-]/g, "-")}`;
+                const { error } = await supabase.storage
+                    .from("images")
+                    .upload(filename, listImage);
+
+                if (error) throw error;
+
+                const { data } = supabase.storage
+                    .from("images")
+                    .getPublicUrl(filename);
+                listImageUrl = data.publicUrl;
+            }
+
+            // Append URLs to FormData
+            if (imageUrl) formData.set("image_url", imageUrl);
+            if (listImageUrl) formData.set("list_image_url", listImageUrl);
+
             const result = await updateEvent(resolvedParams.id, formData);
 
             if (result && 'error' in result && result.error) {
@@ -56,8 +94,9 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
                 // Success
                 router.push("/admin/events?success=true");
             }
-        } catch (e) {
-            setError("Beklenmedik bir hata oluştu.");
+        } catch (e: any) {
+            console.error("Upload error:", e);
+            setError(`Yükleme hatası: ${e.message || "Bilinmeyen hata"}`);
             setLoading(false);
         }
     }
