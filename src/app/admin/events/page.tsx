@@ -4,10 +4,10 @@ import { getEvents, addEvent, deleteEvent } from "@/actions/events";
 import Toast from "@/components/ui/Toast";
 import { Trash2, Plus, Pencil } from "lucide-react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import ImageCropper from "@/components/admin/ImageCropper";
 
-export default function EventsPage() {
+function EventsContent() {
     const [events, setEvents] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [submitLoading, setSubmitLoading] = useState(false);
@@ -82,7 +82,7 @@ export default function EventsPage() {
                                 onCropComplete={setListImage}
                                 aspectRatio={16 / 9} // Or whatever ratio matches your list cards. Assuming similar ratio.
                             />
-                            <p className="text-xs text-white/30 mt-2">Listede görünecek alanı özel olarak seçip kırpabilirsiniz.</p>
+                            <p className="text-xs text-white/30 mt-2">Listede görünecek alanı özel olarak seçıp kırpabilirsiniz.</p>
                         </div>
                     </div>
 
@@ -150,5 +150,13 @@ export default function EventsPage() {
                 )}
             </div>
         </div>
+    );
+}
+
+export default function EventsPage() {
+    return (
+        <Suspense fallback={<div className="text-white">Yükleniyor...</div>}>
+            <EventsContent />
+        </Suspense>
     );
 }
