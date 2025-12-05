@@ -23,7 +23,6 @@ export async function addEvent(formData: FormData) {
     const title = formData.get("title") as string;
     const date = formData.get("date") as string;
     const description = formData.get("description") as string;
-    const image_fit = formData.get("image_fit") as string || "cover";
     const imageFile = formData.get("image") as File;
     const listImageFile = formData.get("list_image") as File;
 
@@ -81,7 +80,6 @@ export async function addEvent(formData: FormData) {
         title,
         date,
         description,
-        image_fit,
         image_url: imageUrl,
         list_image_url: listImageUrl,
     }).select().single();
@@ -138,7 +136,6 @@ export async function updateEvent(id: string, formData: FormData) {
         title,
         date,
         description,
-        image_fit,
     };
 
     if (imageFile && imageFile.size > 0) {

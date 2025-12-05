@@ -48,18 +48,6 @@ export default async function EventsPage() {
                             />
                             <p className="text-xs text-white/30 mt-1">Sadece listede görünür. Yüklemezseniz ana görsel kullanılır.</p>
                         </div>
-                        <div>
-                            <label className="block text-sm text-white/50 mb-1">Görsel Yerleşimi</label>
-                            <select
-                                name="image_fit"
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#D4AF37]"
-                                defaultValue="cover"
-                            >
-                                <option value="cover">Kırp ve Doldur (Cover)</option>
-                                <option value="contain">Tamamını Göster (Contain)</option>
-                                <option value="fill">Zorla Doldur (Fill)</option>
-                            </select>
-                        </div>
                     </div>
                     <div className="md:col-span-2">
                         <label className="block text-sm text-white/50 mb-1">Galeri Görselleri (Çoklu Seçim)</label>

@@ -10,7 +10,6 @@ interface Event {
     description: string;
     image_url?: string;
     list_image_url?: string;
-    image_fit?: string;
 }
 
 export default function Events({ events }: { events: Event[] }) {
@@ -48,7 +47,7 @@ export default function Events({ events }: { events: Event[] }) {
                                                     src={event.list_image_url || event.image_url}
                                                     alt={event.title}
                                                     loading="eager"
-                                                    className={`w-full h-48 object-${event.image_fit || "cover"} transition-transform duration-500 group-hover:scale-110`}
+                                                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                                                 />
                                             </div>
                                         )}
