@@ -131,7 +131,7 @@ export async function updateEvent(id: string, formData: FormData) {
             updates.image_url = publicUrlData.publicUrl;
         } catch (imageError) {
             console.error("Failed to upload event image:", imageError);
-            return { error: "Görsel yüklenirken hata oluştu." };
+            return { error: `Görsel yüklenirken hata oluştu: ${(imageError as Error).message}` };
         }
     }
 
