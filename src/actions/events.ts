@@ -162,6 +162,29 @@ export async function updateEvent(id: string, formData: FormData) {
         }
     }
 
+    const listImageFile = formData.get("list_image") as File;
+    if (listImageFile && listImageFile.size > 0) {
+        try {
+            const sanitizedParams = listImageFile.name.replace(/[^a-zA-Z0-9.-]/g, "-");
+            const filename = `list-${Date.now()}-${sanitizedParams}`;
+            const { error } = await supabase.storage
+                .from("images")
+                .upload(filename, listImageFile, {
+                    cacheControl: "3600",
+                    upsert: false,
+                });
+
+            if (!error) {
+                const { data: publicUrlData } = supabase.storage
+                    .from("images")
+                    .getPublicUrl(filename);
+                updates.list_image_url = publicUrlData.publicUrl;
+            }
+        } catch (e) {
+            console.error("List image upload error:", e);
+        }
+    }
+
     const { error } = await supabase
         .from("events")
         .update(updates)
