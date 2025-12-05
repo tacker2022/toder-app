@@ -9,6 +9,7 @@ interface ImageCropperProps {
     onCropComplete: (original: File, cropped: File) => void;
     aspectRatio?: number;
     label?: string;
+    initialImage?: string | null;
 }
 
 // Helper to center the crop
@@ -28,7 +29,7 @@ function centerAspectCrop(mediaWidth: number, mediaHeight: number, aspect: numbe
     );
 }
 
-export default function ImageCropper({ onCropComplete, aspectRatio = 16 / 9, label = "Görsel Seç" }: ImageCropperProps) {
+export default function ImageCropper({ onCropComplete, aspectRatio = 16 / 9, label = "Görsel Seç", initialImage }: ImageCropperProps) {
     const [imgSrc, setImgSrc] = useState("");
     const [crop, setCrop] = useState<Crop>();
     const [completedCrop, setCompletedCrop] = useState<PixelCrop>();
@@ -110,7 +111,7 @@ export default function ImageCropper({ onCropComplete, aspectRatio = 16 / 9, lab
         <div className="w-full">
             <label className="block text-sm text-white/50 mb-2">{label}</label>
 
-            {!imgSrc && !croppedPreviewUrl && (
+            {!imgSrc && !croppedPreviewUrl && !initialImage && (
                 <div className="relative border-2 border-dashed border-white/10 rounded-xl p-8 text-center hover:border-[#D4AF37]/50 transition-colors cursor-pointer bg-white/5 group">
                     <input
                         type="file"
@@ -121,6 +122,24 @@ export default function ImageCropper({ onCropComplete, aspectRatio = 16 / 9, lab
                     <div className="flex flex-col items-center gap-2">
                         <ImageIcon className="text-white/30 group-hover:text-[#D4AF37] transition-colors" size={32} />
                         <span className="text-white/50 group-hover:text-white transition-colors">Görsel yüklemek için tıklayın</span>
+                    </div>
+                </div>
+            )}
+
+            {!imgSrc && !croppedPreviewUrl && initialImage && (
+                <div className="relative border-2 border-dashed border-white/10 rounded-xl p-4 flex items-center gap-4 bg-white/5 group">
+                    <img src={initialImage} alt="Current" className="h-20 w-32 object-cover rounded-md" />
+                    <div className="flex-1">
+                        <p className="text-sm text-white/70 mb-1">Mevcut görsel kullanılıyor</p>
+                        <div className="relative inline-block">
+                            <span className="text-xs text-[#D4AF37] hover:underline cursor-pointer">Değiştirmek için tıklayın</span>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={onSelectFile}
+                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                            />
+                        </div>
                     </div>
                 </div>
             )}
