@@ -1,9 +1,10 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_noStore } from "next/cache";
 
 export async function getEvents() {
+    unstable_noStore();
     const supabase = await createClient();
     const { data, error } = await supabase
         .from("events")

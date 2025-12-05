@@ -16,7 +16,7 @@ import Contact from "@/components/Contact";
 import Videos from "@/components/Videos";
 import SplashScreen from "@/components/SplashScreen";
 
-export const revalidate = 0;
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const events = await getEvents();
