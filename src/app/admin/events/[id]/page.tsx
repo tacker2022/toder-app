@@ -81,8 +81,14 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
                     </div>
                 )}
 
-                className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37]"
-                    />
+                <input
+                    type="text"
+                    name="title"
+                    defaultValue={event.title}
+                    placeholder="Etkinlik Başlığı"
+                    required
+                    className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37]"
+                />
                 <input
                     type="date"
                     name="date"
