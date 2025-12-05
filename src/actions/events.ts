@@ -225,6 +225,7 @@ export async function updateEvent(id: string, formData: FormData) {
 
     revalidatePath("/admin/events");
     revalidatePath("/");
+    revalidatePath(`/events/${id}`);
     return { success: true };
 }
 
