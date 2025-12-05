@@ -37,15 +37,30 @@ export default async function EventsPage() {
                         accept="image/*"
                         className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#D4AF37] md:col-span-1"
                     />
-                    <select
-                        name="image_fit"
-                        className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#D4AF37] md:col-span-1"
-                        defaultValue="cover"
-                    >
-                        <option value="cover">Kırp ve Doldur (Cover)</option>
-                        <option value="contain">Tamamını Göster (Contain)</option>
-                        <option value="fill">Zorla Doldur (Fill)</option>
-                    </select>
+                    <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm text-white/50 mb-1">Önizleme Görseli (Opsiyonel)</label>
+                            <input
+                                type="file"
+                                name="list_image"
+                                accept="image/*"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#D4AF37]"
+                            />
+                            <p className="text-xs text-white/30 mt-1">Sadece listede görünür. Yüklemezseniz ana görsel kullanılır.</p>
+                        </div>
+                        <div>
+                            <label className="block text-sm text-white/50 mb-1">Görsel Yerleşimi</label>
+                            <select
+                                name="image_fit"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#D4AF37]"
+                                defaultValue="cover"
+                            >
+                                <option value="cover">Kırp ve Doldur (Cover)</option>
+                                <option value="contain">Tamamını Göster (Contain)</option>
+                                <option value="fill">Zorla Doldur (Fill)</option>
+                            </select>
+                        </div>
+                    </div>
                     <div className="md:col-span-2">
                         <label className="block text-sm text-white/50 mb-1">Galeri Görselleri (Çoklu Seçim)</label>
                         <input

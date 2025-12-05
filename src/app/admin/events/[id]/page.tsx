@@ -112,6 +112,19 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
                     </div>
 
                     <div>
+                        <label className="block text-sm text-white/50 mb-2">Önizleme Görseli (Opsiyonel - Sadece Listede Görünür)</label>
+                        {event?.list_image_url && (
+                            <img src={event.list_image_url} alt="List Preview" className="w-32 h-20 object-cover rounded-lg mb-4 border border-white/10" />
+                        )}
+                        <input
+                            type="file"
+                            name="list_image"
+                            accept="image/*"
+                            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37]"
+                        />
+                    </div>
+
+                    <div>
                         <label className="block text-sm text-white/50 mb-2">Görsel Yerleşimi</label>
                         <select
                             name="image_fit"

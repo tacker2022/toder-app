@@ -9,6 +9,7 @@ interface Event {
     date: string;
     description: string;
     image_url?: string;
+    list_image_url?: string;
     image_fit?: string;
 }
 
@@ -41,10 +42,10 @@ export default function Events({ events }: { events: Event[] }) {
                                         <span className="month">{month}</span>
                                     </div>
                                     <div className="event-info">
-                                        {event.image_url && (
+                                        {(event.image_url || event.list_image_url) && (
                                             <div className="overflow-hidden rounded-lg mb-4">
                                                 <img
-                                                    src={event.image_url}
+                                                    src={event.list_image_url || event.image_url}
                                                     alt={event.title}
                                                     loading="eager"
                                                     className={`w-full h-48 object-${event.image_fit || "cover"} transition-transform duration-500 group-hover:scale-110`}
