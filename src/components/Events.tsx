@@ -48,6 +48,12 @@ export default function Events({ events }: { events: Event[] }) {
                                                     alt={event.title}
                                                     loading="eager"
                                                     className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                                                    onError={(e) => {
+                                                        const target = e.target as HTMLImageElement;
+                                                        if (target.src !== event.image_url && event.image_url) {
+                                                            target.src = event.image_url;
+                                                        }
+                                                    }}
                                                 />
                                             </div>
                                         )}
