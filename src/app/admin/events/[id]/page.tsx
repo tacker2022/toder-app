@@ -112,6 +112,19 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
                     </div>
 
                     <div>
+                        <label className="block text-sm text-white/50 mb-2">Görsel Yerleşimi</label>
+                        <select
+                            name="image_fit"
+                            defaultValue={event?.image_fit || "cover"}
+                            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37]"
+                        >
+                            <option value="cover">Kırp ve Doldur (Cover) - Tüm alanı kaplar</option>
+                            <option value="contain">Tamamını Göster (Contain) - Kırpmadan sığdırır</option>
+                            <option value="fill">Sündür (Fill) - Zorla doldurur</option>
+                        </select>
+                    </div>
+
+                    <div>
                         <label className="block text-sm text-white/50 mb-2">Galeri Görselleri (Yeni Ekle)</label>
                         <input
                             type="file"

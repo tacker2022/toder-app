@@ -35,8 +35,17 @@ export default async function EventsPage() {
                         type="file"
                         name="image"
                         accept="image/*"
-                        className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#D4AF37] md:col-span-2"
+                        className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#D4AF37] md:col-span-1"
                     />
+                    <select
+                        name="image_fit"
+                        className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#D4AF37] md:col-span-1"
+                        defaultValue="cover"
+                    >
+                        <option value="cover">Kırp ve Doldur (Cover)</option>
+                        <option value="contain">Tamamını Göster (Contain)</option>
+                        <option value="fill">Zorla Doldur (Fill)</option>
+                    </select>
                     <div className="md:col-span-2">
                         <label className="block text-sm text-white/50 mb-1">Galeri Görselleri (Çoklu Seçim)</label>
                         <input
