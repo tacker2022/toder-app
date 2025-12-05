@@ -6,6 +6,7 @@ import { Trash2, Plus, Pencil } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect, Suspense } from "react";
 import ImageCropper from "@/components/admin/ImageCropper";
+import { createClient } from "@/utils/supabase/client";
 
 function EventsContent() {
     const [events, setEvents] = useState<any[]>([]);
@@ -28,15 +29,56 @@ function EventsContent() {
 
     async function handleSubmit(formData: FormData) {
         setSubmitLoading(true);
-        if (mainImage) formData.set("image", mainImage);
-        if (listImage) formData.set("list_image", listImage);
 
         try {
+            const supabase = createClient();
+
+            // Upload Main Image
+            let imageUrl = "";
+            if (mainImage) {
+                const filename = `${Date.now()}-${mainImage.name.replace(/[^a-zA-Z0-9.-]/g, "-")}`;
+                const { error } = await supabase.storage
+                    .from("images")
+                    .upload(filename, mainImage);
+
+                if (error) throw error;
+
+                const { data } = supabase.storage
+                    .from("images")
+                    .getPublicUrl(filename);
+                imageUrl = data.publicUrl;
+            }
+
+            // Upload List Image
+            let listImageUrl = "";
+            if (listImage) {
+                const filename = `list-${Date.now()}-${listImage.name.replace(/[^a-zA-Z0-9.-]/g, "-")}`;
+                const { error } = await supabase.storage
+                    .from("images")
+                    .upload(filename, listImage);
+
+                if (error) throw error;
+
+                const { data } = supabase.storage
+                    .from("images")
+                    .getPublicUrl(filename);
+                listImageUrl = data.publicUrl;
+            }
+
+            // Append URLs to FormData
+            if (imageUrl) formData.set("image_url", imageUrl);
+            if (listImageUrl) formData.set("list_image_url", listImageUrl);
+
+            // Note: Gallery upload is still handled server-side for now to keep it simple, 
+            // or we can move it here too. For now let's focus on the main images which were failing.
+            // Actually, safer to do all files here if possible, but gallery is multiple files. 
+            // Let's stick to main/list images first as they are the priority.
+
             await addEvent(formData);
-            // Reset form manually or reload page. Simplest is reload to clear states.
             window.location.reload();
         } catch (error) {
-            console.error(error);
+            console.error("Upload error:", error);
+            alert("Resim yüklenirken hata oluştu. Lütfen dosya boyutunu kontrol edin veya tekrar deneyin.");
             setSubmitLoading(false);
         }
     }
