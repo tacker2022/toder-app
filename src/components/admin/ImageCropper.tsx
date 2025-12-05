@@ -6,7 +6,7 @@ import "react-image-crop/dist/ReactCrop.css";
 import { X, Crop as CropIcon, Image as ImageIcon } from "lucide-react";
 
 interface ImageCropperProps {
-    onCropComplete: (file: File) => void;
+    onCropComplete: (original: File, cropped: File) => void;
     aspectRatio?: number;
     label?: string;
 }
@@ -90,9 +90,9 @@ export default function ImageCropper({ onCropComplete, aspectRatio = 16 / 9, lab
     }
 
     async function handleCrop() {
-        if (imgRef.current && completedCrop) {
+        if (imgRef.current && completedCrop && originalFile) {
             const croppedFile = await getCroppedImg(imgRef.current, completedCrop, "cropped-image.png");
-            onCropComplete(croppedFile);
+            onCropComplete(originalFile, croppedFile);
             setCroppedPreviewUrl(URL.createObjectURL(croppedFile));
             setImgSrc(""); // Close cropper view
         }

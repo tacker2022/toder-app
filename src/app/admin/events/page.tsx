@@ -67,23 +67,19 @@ function EventsContent() {
                         className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#D4AF37]"
                     />
 
-                    <div className="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <ImageCropper
-                                label="Ana Görsel (Detay Sayfası)"
-                                onCropComplete={setMainImage}
-                                aspectRatio={16 / 9}
-                            />
-                            <p className="text-xs text-white/30 mt-2">Etkinlik detayında en üstte görünecek büyük fotoğraf.</p>
-                        </div>
-                        <div>
-                            <ImageCropper
-                                label="Liste Önizleme Görseli (Kırpma)"
-                                onCropComplete={setListImage}
-                                aspectRatio={16 / 9} // Or whatever ratio matches your list cards. Assuming similar ratio.
-                            />
-                            <p className="text-xs text-white/30 mt-2">Listede görünecek alanı özel olarak seçıp kırpabilirsiniz.</p>
-                        </div>
+                    <div className="md:col-span-2">
+                        <ImageCropper
+                            label="Etkinlik Görseli (Yükleyin ve Listede Görünecek Alanı Seçin)"
+                            onCropComplete={(original, cropped) => {
+                                setMainImage(original);
+                                setListImage(cropped);
+                            }}
+                            aspectRatio={16 / 9}
+                        />
+                        <p className="text-xs text-white/30 mt-2">
+                            Yüklediğiniz fotoğrafın tamamı detay sayfasında kullanılır.
+                            Seçtiğiniz/kırptığınız alan ise etkinlik listesinde önizleme olarak kullanılır.
+                        </p>
                     </div>
 
                     <div className="md:col-span-2">
