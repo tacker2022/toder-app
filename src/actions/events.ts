@@ -24,58 +24,12 @@ export async function addEvent(formData: FormData) {
     const title = formData.get("title") as string;
     const date = formData.get("date") as string;
     const description = formData.get("description") as string;
-    const imageFile = formData.get("image") as File;
-    const listImageFile = formData.get("list_image") as File;
+
+    // Images are now uploaded client-side, we just get the URLs
+    const imageUrl = formData.get("image_url") as string || "";
+    const listImageUrl = formData.get("list_image_url") as string || "";
 
     const galleryFiles = formData.getAll("gallery") as File[];
-
-    let imageUrl = "";
-    let listImageUrl = "";
-
-    if (listImageFile && listImageFile.size > 0) {
-        try {
-            const sanitizedParams = listImageFile.name.replace(/[^a-zA-Z0-9.-]/g, "-");
-            const filename = `list-${Date.now()}-${sanitizedParams}`;
-            const { error } = await supabase.storage
-                .from("images")
-                .upload(filename, listImageFile, {
-                    cacheControl: "3600",
-                    upsert: false,
-                });
-
-            if (!error) {
-                const { data: publicUrlData } = supabase.storage
-                    .from("images")
-                    .getPublicUrl(filename);
-                listImageUrl = publicUrlData.publicUrl;
-            }
-        } catch (e) {
-            console.error("List image upload error:", e);
-        }
-    }
-
-    if (imageFile && imageFile.size > 0) {
-        try {
-            const filename = `${Date.now()}-${imageFile.name.replace(/\s/g, "-")}`;
-            const { data, error } = await supabase.storage
-                .from("images")
-                .upload(filename, imageFile, {
-                    cacheControl: "3600",
-                    upsert: false,
-                });
-
-            if (error) throw error;
-
-            // Get public URL
-            const { data: publicUrlData } = supabase.storage
-                .from("images")
-                .getPublicUrl(filename);
-
-            imageUrl = publicUrlData.publicUrl;
-        } catch (imageError) {
-            console.error("Failed to upload event image:", imageError);
-        }
-    }
 
     const { data: eventData, error } = await supabase.from("events").insert({
         title,
@@ -128,8 +82,10 @@ export async function updateEvent(id: string, formData: FormData) {
     const title = formData.get("title") as string;
     const date = formData.get("date") as string;
     const description = formData.get("description") as string;
-    const image_fit = formData.get("image_fit") as string || "cover";
-    const imageFile = formData.get("image") as File;
+
+    // Images are now uploaded client-side
+    const image_url = formData.get("image_url") as string;
+    const list_image_url = formData.get("list_image_url") as string;
 
     const galleryFiles = formData.getAll("gallery") as File[];
 
@@ -139,52 +95,8 @@ export async function updateEvent(id: string, formData: FormData) {
         description,
     };
 
-    if (imageFile && imageFile.size > 0) {
-        try {
-            const sanitizedParams = imageFile.name.replace(/[^a-zA-Z0-9.-]/g, "-");
-            const filename = `${Date.now()}-${sanitizedParams}`;
-            const { data, error } = await supabase.storage
-                .from("images")
-                .upload(filename, imageFile, {
-                    cacheControl: "3600",
-                    upsert: false,
-                });
-
-            if (error) throw error;
-
-            const { data: publicUrlData } = supabase.storage
-                .from("images")
-                .getPublicUrl(filename);
-
-            updates.image_url = publicUrlData.publicUrl;
-        } catch (imageError) {
-            console.error("Failed to upload event image:", imageError);
-            return { error: `Görsel yüklenirken hata oluştu: ${(imageError as Error).message}` };
-        }
-    }
-
-    const listImageFile = formData.get("list_image") as File;
-    if (listImageFile && listImageFile.size > 0) {
-        try {
-            const sanitizedParams = listImageFile.name.replace(/[^a-zA-Z0-9.-]/g, "-");
-            const filename = `list-${Date.now()}-${sanitizedParams}`;
-            const { error } = await supabase.storage
-                .from("images")
-                .upload(filename, listImageFile, {
-                    cacheControl: "3600",
-                    upsert: false,
-                });
-
-            if (!error) {
-                const { data: publicUrlData } = supabase.storage
-                    .from("images")
-                    .getPublicUrl(filename);
-                updates.list_image_url = publicUrlData.publicUrl;
-            }
-        } catch (e) {
-            console.error("List image upload error:", e);
-        }
-    }
+    if (image_url) updates.image_url = image_url;
+    if (list_image_url) updates.list_image_url = list_image_url;
 
     const { error } = await supabase
         .from("events")
