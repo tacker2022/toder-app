@@ -47,7 +47,7 @@ export default function Events({ events }: { events: Event[] }) {
                                                     src={event.list_image_url || event.image_url}
                                                     alt={event.title}
                                                     loading="eager"
-                                                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                                                    className="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-110"
                                                     onError={(e) => {
                                                         const target = e.target as HTMLImageElement;
                                                         if (target.src !== event.image_url && event.image_url) {
