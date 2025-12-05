@@ -5,6 +5,7 @@ import { updateEvent, getEventById } from "@/actions/events";
 import { getGalleryImages, deleteGalleryImage } from "@/actions/gallery";
 import { Save, ArrowLeft, AlertCircle, Trash2 } from "lucide-react";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { use } from "react";
 import ImageCropper from "@/components/admin/ImageCropper";
