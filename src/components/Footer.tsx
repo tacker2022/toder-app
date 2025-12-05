@@ -1,7 +1,10 @@
 "use client";
 
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { MapPin, Phone, Mail, Instagram, Linkedin, ChevronRight, ArrowUp } from "lucide-react";
+import { MapPin, Phone, Mail, Instagram, Linkedin, ChevronRight, ArrowUp, MessageCircle, Code } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
 
 export default function Footer() {
     const scrollToTop = () => {
@@ -111,9 +114,72 @@ export default function Footer() {
                 </div>
 
                 <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-white/40 text-sm text-center md:text-left">
-                        © {new Date().getFullYear()} TODER Project – Tüm Hakları Saklıdır.
-                    </p>
+                    <div className="flex flex-col md:flex-row items-center gap-6">
+                        <p className="text-white/40 text-sm text-center md:text-left">
+                            © {new Date().getFullYear()} TODER Project – Tüm Hakları Saklıdır.
+                        </p>
+
+                        {/* Developer Credit */}
+                        <div className="relative group">
+                            <span className="text-white/30 text-xs flex items-center gap-2 cursor-pointer hover:text-[#D4AF37] transition-colors py-2">
+                                <Code size={14} />
+                                Developed by <span className="font-medium">Talha Çalargün</span>
+                            </span>
+
+                            {/* Hover Card */}
+                            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                                <div className="bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/10 p-5 rounded-2xl shadow-2xl transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                                    <div className="flex flex-col items-center text-center">
+                                        <div className="w-20 h-20 rounded-full border-2 border-[#D4AF37]/30 p-1 mb-3">
+                                            <div className="w-full h-full rounded-full overflow-hidden relative">
+                                                <Image
+                                                    src="/images/developer.jpg"
+                                                    alt="Talha Çalargün"
+                                                    fill
+                                                    className="object-cover"
+                                                />
+                                            </div>
+                                        </div>
+                                        <h4 className="text-white font-bold text-lg">Talha Çalargün</h4>
+                                        <p className="text-[#D4AF37] text-xs font-medium mb-4">Digital Systems & Technology Developer</p>
+
+                                        <div className="flex gap-3 justify-center">
+                                            <a
+                                                href="https://www.linkedin.com/in/talhaemrecalargun/"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:bg-[#0077b5] hover:text-white transition-all"
+                                                title="LinkedIn"
+                                            >
+                                                <Linkedin size={16} />
+                                            </a>
+                                            <a
+                                                href="https://www.instagram.com/talhacalargun"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:bg-[#E1306C] hover:text-white transition-all"
+                                                title="Instagram"
+                                            >
+                                                <Instagram size={16} />
+                                            </a>
+                                            <a
+                                                href="https://api.whatsapp.com/send/?phone=905372939874&text&type=phone_number&app_absent=0"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:bg-[#25D366] hover:text-white transition-all"
+                                                title="WhatsApp"
+                                            >
+                                                <MessageCircle size={16} />
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    {/* Arrow */}
+                                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#0a0a0a]/90 border-r border-b border-white/10 rotate-45"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <button
                         onClick={scrollToTop}
                         className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-white/60 hover:bg-[#D4AF37] hover:text-black transition-all duration-300 group"
