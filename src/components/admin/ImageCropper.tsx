@@ -57,8 +57,9 @@ export default function ImageCropper({ onCropComplete, aspectRatio = 16 / 9, lab
         const canvas = document.createElement("canvas");
         const scaleX = image.naturalWidth / image.width;
         const scaleY = image.naturalHeight / image.height;
-        canvas.width = crop.width;
-        canvas.height = crop.height;
+        // Use the actual pixel dimensions of the original image
+        canvas.width = Math.floor(crop.width * scaleX);
+        canvas.height = Math.floor(crop.height * scaleY);
         const ctx = canvas.getContext("2d");
 
         if (!ctx) {
