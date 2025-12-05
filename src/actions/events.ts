@@ -82,7 +82,6 @@ export async function addEvent(formData: FormData) {
         date,
         description,
         image_fit,
-        image_fit,
         image_url: imageUrl,
         list_image_url: listImageUrl,
     }).select().single();
