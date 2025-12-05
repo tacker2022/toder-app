@@ -1,4 +1,5 @@
 "use client";
+// Force new deployment for image fix verification
 
 import { updateEvent, getEventById } from "@/actions/events";
 import { getGalleryImages, deleteGalleryImage } from "@/actions/gallery";
