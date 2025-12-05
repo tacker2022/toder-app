@@ -75,8 +75,8 @@ export default function ImageCropper({ onCropComplete, aspectRatio = 16 / 9, lab
             crop.height * scaleY,
             0,
             0,
-            crop.width,
-            crop.height,
+            canvas.width,
+            canvas.height,
         );
 
         return new Promise((resolve, reject) => {
