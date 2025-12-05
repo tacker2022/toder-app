@@ -114,7 +114,8 @@ export async function updateEvent(id: string, formData: FormData) {
 
     if (imageFile && imageFile.size > 0) {
         try {
-            const filename = `${Date.now()}-${imageFile.name.replace(/\s/g, "-")}`;
+            const sanitizedParams = imageFile.name.replace(/[^a-zA-Z0-9.-]/g, "-");
+            const filename = `${Date.now()}-${sanitizedParams}`;
             const { data, error } = await supabase.storage
                 .from("images")
                 .upload(filename, imageFile, {
@@ -150,7 +151,8 @@ export async function updateEvent(id: string, formData: FormData) {
         for (const file of galleryFiles) {
             if (file.size > 0) {
                 try {
-                    const filename = `gallery-${Date.now()}-${Math.random().toString(36).substring(7)}-${file.name.replace(/\s/g, "-")}`;
+                    const sanitizedGalleryName = file.name.replace(/[^a-zA-Z0-9.-]/g, "-");
+                    const filename = `gallery-${Date.now()}-${Math.random().toString(36).substring(7)}-${sanitizedGalleryName}`;
                     const { error: uploadError } = await supabase.storage
                         .from("images")
                         .upload(filename, file);
