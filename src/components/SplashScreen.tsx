@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useSplash } from "@/context/SplashContext";
 
 interface Member {
     id: string;
@@ -13,15 +14,17 @@ interface Member {
 
 export default function SplashScreen({ members }: { members: Member[] }) {
     const [isVisible, setIsVisible] = useState(true);
+    const { setSplashFinished } = useSplash();
 
     useEffect(() => {
         // Hide splash screen after 6 seconds
         const timer = setTimeout(() => {
             setIsVisible(false);
+            setTimeout(() => setSplashFinished(true), 800); // Wait for exit animation
         }, 3000);
 
         return () => clearTimeout(timer);
-    }, []);
+    }, [setSplashFinished]);
 
     return (
         <AnimatePresence>

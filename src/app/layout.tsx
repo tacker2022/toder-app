@@ -7,6 +7,7 @@ import Script from "next/script";
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
+import { SplashProvider } from "@/context/SplashContext";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
@@ -67,51 +68,51 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <body className={`${inter.variable} ${outfit.variable} antialiased`}>
-        {children}
-        <Analytics />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "TODER Project",
-              url: "https://toder.net",
-              logo: "https://toder.net/logo.png", // Assuming a logo exists or will exist
-              sameAs: [
-                "https://twitter.com/toderproject",
-                "https://instagram.com/toderproject",
-                "https://linkedin.com/company/toderproject",
-              ],
-              contactPoint: {
-                "@type": "ContactPoint",
-                telephone: "+90-555-555-5555",
-                contactType: "customer service",
-                areaServed: "TR",
-                availableLanguage: "Turkish",
-              },
-            }),
-          }}
-        />
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-YZ2TXWFEV0"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+        <SplashProvider>
+          {children}
+          <Analytics />
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: "TODER Project",
+                url: "https://toder.net",
+                logo: "https://toder.net/logo.png", // Assuming a logo exists or will exist
+                sameAs: [
+                  "https://twitter.com/toderproject",
+                  "https://instagram.com/toderproject",
+                  "https://linkedin.com/company/toderproject",
+                ],
+                contactPoint: {
+                  "@type": "ContactPoint",
+                  telephone: "+90-555-555-5555",
+                  contactType: "customer service",
+                  areaServed: "TR",
+                  availableLanguage: "Turkish",
+                },
+              }),
+            }}
+          />
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-YZ2TXWFEV0"
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
 
-            gtag('config', 'G-YZ2TXWFEV0');
-          `}
-        </Script>
-        <Chatbot />
-        <Chatbot />
-        <CommandPalette />
-        <ScrollProgress />
-        <CustomCursor />
-        <Analytics />
+                gtag('config', 'G-YZ2TXWFEV0');
+            `}
+          </Script>
+          <Chatbot />
+          <CommandPalette />
+          <ScrollProgress />
+          <CustomCursor />
+        </SplashProvider>
       </body>
     </html>
   );

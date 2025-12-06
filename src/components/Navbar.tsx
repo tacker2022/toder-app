@@ -17,6 +17,7 @@ import {
     X,
     ExternalLink
 } from "lucide-react";
+import { useSplash } from "@/context/SplashContext";
 
 const MENU_ITEMS = [
     {
@@ -48,6 +49,7 @@ export default function Navbar() {
     const [activeTab, setActiveTab] = useState<string | null>(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const { isSplashFinished } = useSplash();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -73,7 +75,8 @@ export default function Navbar() {
 
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 ${scrolled ? "bg-black/80 backdrop-blur-md py-4 border-b border-white/10" : "bg-transparent py-6"
+            className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-700 ${!isSplashFinished ? "opacity-0 -translate-y-full pointer-events-none" : "opacity-100 translate-y-0"
+                } ${scrolled ? "bg-black/80 backdrop-blur-md py-4 border-b border-white/10" : "bg-transparent py-6"
                 }`}
             onMouseLeave={() => setActiveTab(null)}
         >
