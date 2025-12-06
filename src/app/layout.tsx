@@ -3,7 +3,6 @@ import Chatbot from "@/components/Chatbot";
 import CommandPalette from "@/components/CommandPalette";
 import ScrollProgress from "@/components/ScrollProgress";
 import CustomCursor from "@/components/CustomCursor";
-import BackToTop from "@/components/BackToTop";
 import Script from "next/script";
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
@@ -112,7 +111,6 @@ export default function RootLayout({
         <CommandPalette />
         <ScrollProgress />
         <CustomCursor />
-        <BackToTop />
         <Analytics />
       </body>
     </html>
