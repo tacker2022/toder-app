@@ -19,7 +19,7 @@ export default async function BlogSection() {
             <div className="container mx-auto px-4 relative z-10">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#D4AF37] to-[#F2D06B]">
-                        Haberler & Duyurular
+                        Haberler & Etkinlikler
                     </h2>
                     <p className="text-xl text-white/70 max-w-2xl mx-auto">
                         Sektörden en güncel haberler ve TODER Project etkinlikleri.
