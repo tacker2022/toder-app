@@ -38,10 +38,14 @@ export default function Vision() {
                                 <span className="w-2 h-8 bg-[#D4AF37] rounded-full"></span>
                                 Misyonumuz
                             </h3>
-                            <p className="text-white/70 leading-relaxed">
-                                Otomotiv ekosistemindeki tüm paydaşları bir araya getirerek, sektörün sürdürülebilir büyümesine katkı sağlamak,
-                                dijital dönüşüm süreçlerine liderlik etmek ve uluslararası rekabet gücümüzü artıracak projeler geliştirmektir.
-                            </p>
+                            <div className="text-white/70 leading-relaxed space-y-4">
+                                <p>
+                                    Türkiye’de otopark sektörünün tüm paydaşlarını ortak bir platformda bir araya getirerek; teknoloji, standartlaşma ve sürdürülebilir işletmecilik anlayışını güçlendirmek; sektörün ihtiyaçlarını analiz ederek yenilikçi, şeffaf ve verimli çözümler üretmek; mevzuat gelişimlerine liderlik etmek ve akıllı şehir altyapılarının gelişimine katkı sunmaktır.
+                                </p>
+                                <p>
+                                    TODER, yatırımcıların, işletmecilerin ve teknoloji sağlayıcılarının güç birliğini sağlayarak sektörün geleceğini ortak akılla şekillendirmeyi misyon edinmiştir.
+                                </p>
+                            </div>
                         </SpotlightCard>
                     </motion.div>
 
@@ -56,10 +60,14 @@ export default function Vision() {
                                 <span className="w-2 h-8 bg-[#D4AF37] rounded-full"></span>
                                 Vizyonumuz
                             </h3>
-                            <p className="text-white/70 leading-relaxed">
-                                Türkiye&apos;yi global otomotiv dünyasında teknoloji ve inovasyon üssü haline getirmek;
-                                elektrikli mobilite, otonom sürüş ve bağlantılı araç teknolojilerinde öncü bir rol üstlenmektir.
-                            </p>
+                            <div className="text-white/70 leading-relaxed space-y-4">
+                                <p>
+                                    Türkiye’de otopark işletmeciliğini modern, dijital ve uluslararası standartlara uygun bir yapıya dönüştürerek; mobilite, akıllı şehirler ve kentsel dönüşüm vizyonu doğrultusunda sektörün stratejik yol göstericisi olmak.
+                                </p>
+                                <p>
+                                    Teknoloji odaklı çözümlerle sürdürülebilir işletmeciliği destekleyen, paydaşlar arası iş birliğini güçlendiren, küresel ölçekte referans kabul edilen öncü bir sektör birliği haline gelmektir.
+                                </p>
+                            </div>
                         </SpotlightCard>
                     </motion.div>
                 </div>
