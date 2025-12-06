@@ -1,6 +1,6 @@
 "use client";
 
-import { Share2, CalendarPlus, Copy, check } from "lucide-react";
+import { Share2, CalendarPlus, Copy, Check } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -65,7 +65,7 @@ export default function EventActions({ title, date, description, url }: EventAct
                 className="flex items-center gap-2 bg-white/10 text-white px-4 py-2 rounded-lg font-medium text-sm hover:bg-white/20 transition-colors"
                 title="Linki Kopyala"
             >
-                {copied ? <check size={18} /> : <Copy size={18} />}
+                {copied ? <Check size={18} /> : <Copy size={18} />}
                 {copied ? "Kopyalandı" : "Linki Kopyala"}
             </motion.button>
         </div>
