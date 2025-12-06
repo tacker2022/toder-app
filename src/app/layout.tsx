@@ -7,6 +7,8 @@ import Script from "next/script";
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
+import FilmGrain from "@/components/FilmGrain";
+import SmoothScroll from "@/components/SmoothScroll";
 import { SplashProvider } from "@/context/SplashContext";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -70,6 +72,8 @@ export default function RootLayout({
       <body className={`${inter.variable} ${outfit.variable} antialiased`}>
         <SplashProvider>
           {children}
+          <FilmGrain />
+          <SmoothScroll />
           <Analytics />
           <script
             type="application/ld+json"

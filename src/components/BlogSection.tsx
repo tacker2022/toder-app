@@ -1,12 +1,13 @@
 import { getPosts } from "@/actions/posts";
 import { Calendar, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import ImageReveal from "@/components/ui/ImageReveal";
 
 export default async function BlogSection() {
     const posts = await getPosts();
     const latestPosts = posts.slice(0, 3); // Show only latest 3 posts
 
-    if (latestPosts.length === 0) return null;
+    if (!latestPosts || latestPosts.length === 0) return null;
 
     return (
         <section id="blog" className="py-20 bg-black text-white relative overflow-hidden">
@@ -35,10 +36,10 @@ export default async function BlogSection() {
                         >
                             <div className="aspect-video bg-black/50 relative overflow-hidden">
                                 {post.image_url ? (
-                                    <img
+                                    <ImageReveal
                                         src={post.image_url}
                                         alt={post.title}
-                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        className="w-full h-full"
                                     />
                                 ) : (
                                     <div className="w-full h-full flex items-center justify-center text-white/20">

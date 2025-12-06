@@ -17,50 +17,55 @@ export default function Vision() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                >
-                    <p>
-                        TODER (Tüm Otopark Entegratör Yatırımcı ve İşletmecileri Derneği), Türkiye’de otopark sektörünü ortak bir çatı altında toplayarak;
-                        teknoloji, standartlaşma ve sürdürülebilir işletmecilik alanlarında güçlü bir ekosistem oluşturmayı hedefleyen bağımsız bir sektörel birliktir.
-                        Otopark entegratörleri, yatırımcılar, işletmeciler ve teknoloji sağlayıcılarını aynı platformda buluşturan TODER, sektörün ihtiyaçlarını analiz ederek
-                        ortak çözümler üretir, mevzuat gelişimlerine liderlik eder ve tüm paydaşların daha verimli, şeffaf ve yenilikçi bir yapıda hizmet verebilmesi için çalışmalar yürütür.
-                        Türkiye’nin mobilite, planlı şehirler ve kentsel dönüşüm vizyonu doğrultusunda; modern otopark işletmeciliğinin geleceğini şekillendirmeyi ve
-                        akıllı şehir altyapısının güçlü bir parçası olmayı amaçlar.
-                    </p>
-                </motion.div>
+        <section id="vizyon" className="py-20 bg-black relative overflow-hidden" ref={ref}>
+                    <div className="container mx-auto px-4">
+                        <div className="text-center mb-16">
+                            <h2 className="section-title text-[#D4AF37]">
+                                Vizyon & Misyon
+                            </h2>
+                            <p className="max-w-2xl mx-auto text-white/60">
+                                Otomotiv sektörünün geleceğine yön veren stratejik hedeflerimiz.
+                            </p>
+                        </div>
 
-                <div className="cards-grid">
-                    {[
-                        {
-                            icon: <Cpu size={40} className="text-[#D4AF37]" />,
-                            title: "Dijital Dönüşüm",
-                            desc: "Sektörün dijital çağa adaptasyonunu hızlandıran yenilikçi çözümler ve stratejiler.",
-                        },
-                        {
-                            icon: <Handshake size={40} className="text-[#D4AF37]" />,
-                            title: "Sektörel İşbirliği",
-                            desc: "Paydaşlar arasında güçlü bağlar kurarak ortak akıl ve sinerji oluşturma.",
-                        },
-                        {
-                            icon: <TrendingUp size={40} className="text-[#D4AF37]" />,
-                            title: "Eğitim & Gelişim",
-                            desc: "Sürekli öğrenme kültürü ile profesyonel yetkinliklerin artırılması.",
-                        },
-                    ].map((item, index) => (
-                        <motion.div
-                            key={index}
-                            className="card glass-card"
-                            initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                            transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.2 }}
-                            whileHover={{ y: -10 }}
-                        >
-                            <div className="card-icon">{item.icon}</div>
-                            <h3>{item.title}</h3>
-                            <p>{item.desc}</p>
-                        </motion.div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
+                        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                            {/* Misyon */}
+                            <motion.div
+                                initial={{ opacity: 0, x: -50 }}
+                                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                                transition={{ duration: 0.8, delay: 0.2 }}
+                            >
+                                <SpotlightCard className="h-full p-8 border-white/5 hover:border-[#D4AF37]/30 transition-colors">
+                                    <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                                        <span className="w-2 h-8 bg-[#D4AF37] rounded-full"></span>
+                                        Misyonumuz
+                                    </h3>
+                                    <p className="text-white/70 leading-relaxed">
+                                        Otomotiv ekosistemindeki tüm paydaşları bir araya getirerek, sektörün sürdürülebilir büyümesine katkı sağlamak,
+                                        dijital dönüşüm süreçlerine liderlik etmek ve uluslararası rekabet gücümüzü artıracak projeler geliştirmektir.
+                                    </p>
+                                </SpotlightCard>
+                            </motion.div>
+
+                            {/* Vizyon */}
+                            <motion.div
+                                initial={{ opacity: 0, x: 50 }}
+                                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                                transition={{ duration: 0.8, delay: 0.4 }}
+                            >
+                                <SpotlightCard className="h-full p-8 border-white/5 hover:border-[#D4AF37]/30 transition-colors">
+                                    <h3 className="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                                        <span className="w-2 h-8 bg-[#D4AF37] rounded-full"></span>
+                                        Vizyonumuz
+                                    </h3>
+                                    <p className="text-white/70 leading-relaxed">
+                                        Türkiye&apos;yi global otomotiv dünyasında teknoloji ve inovasyon üssü haline getirmek;
+                                        elektrikli mobilite, otonom sürüş ve bağlantılı araç teknolojilerinde öncü bir rol üstlenmektir.
+                                    </p>
+                                </SpotlightCard>
+                            </motion.div>
+                        </div>
+                    </div>
+                </section>
+                );
 }

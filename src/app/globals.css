@@ -16,6 +16,11 @@
   --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+::selection {
+  background-color: var(--accent-color);
+  color: #000;
+}
+
 html {
   scroll-behavior: smooth;
 }
