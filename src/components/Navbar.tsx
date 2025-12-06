@@ -25,17 +25,17 @@ const MENU_ITEMS = [
     {
         title: "KURUMSAL",
         items: [
-            { label: "Vizyon & Misyon", href: "#vizyon", icon: Building2, desc: "Değerlerimiz ve gelecek hedeflerimiz" },
-            { label: "Yönetim Kurulu", href: "#yonetim", icon: Users, desc: "Derneğimizi yöneten kadro" },
-            { label: "Komisyonlar", href: "#komisyonlar", icon: FileText, desc: "Çalışma gruplarımız ve komiteler" },
+            { label: "Vizyon & Misyon", href: "/#vizyon", icon: Building2, desc: "Değerlerimiz ve gelecek hedeflerimiz" },
+            { label: "Yönetim Kurulu", href: "/#yonetim", icon: Users, desc: "Derneğimizi yöneten kadro" },
+            { label: "Komisyonlar", href: "/#komisyonlar", icon: FileText, desc: "Çalışma gruplarımız ve komiteler" },
         ]
     },
     {
         title: "MEDYA & ETKİNLİK",
         items: [
-            { label: "Haberler", href: "#blog", icon: Newspaper, desc: "Sektörden en güncel gelişmeler" },
+            { label: "Haberler", href: "/#blog", icon: Newspaper, desc: "Sektörden en güncel gelişmeler" },
             { label: "Duyurular", href: "/events", icon: Calendar, desc: "Yaklaşan etkinlikler ve programlar" },
-            { label: "Video Galeri", href: "#medya", icon: Video, desc: "Etkinlik kayıtları ve röportajlar" },
+            { label: "Video Galeri", href: "/#medya", icon: Video, desc: "Etkinlik kayıtları ve röportajlar" },
         ]
     },
     {
@@ -67,14 +67,28 @@ export default function Navbar() {
 
     // Smooth scroll handler
     const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-        if (href.startsWith("#")) {
-            e.preventDefault();
-            const element = document.querySelector(href);
-            if (element) {
-                element.scrollIntoView({ behavior: "smooth" });
+        // If it's an anchor link (starts with /# or #)
+        if (href.includes("#")) {
+            const [path, hash] = href.split("#");
+            const targetId = "#" + hash;
+
+            // If we are currently on the home page, scroll smoothly
+            if (pathname === "/" && (path === "/" || path === "")) {
+                e.preventDefault();
+                const element = document.querySelector(targetId);
+                if (element) {
+                    //                    const yOffset = -80; // Navbar height offset if needed
+                    //                    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                    //                    window.scrollTo({ top: y, behavior: 'smooth' });
+                    element.scrollIntoView({ behavior: "smooth" });
+                }
+                setIsMobileMenuOpen(false);
+            } else {
+                // If we are NOT on home page, let Next.js Link handle the navigation to /#id
                 setIsMobileMenuOpen(false);
             }
         } else {
+            // Standard page navigation
             setIsMobileMenuOpen(false);
         }
     };
