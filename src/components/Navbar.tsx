@@ -57,6 +57,11 @@ export default function Navbar() {
     const isHome = pathname === "/";
     const shouldShow = !isHome || isSplashFinished;
 
+    // Hide Navbar on Admin and Auth pages
+    if (pathname.startsWith("/admin") || pathname.startsWith("/auth")) {
+        return null;
+    }
+
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
