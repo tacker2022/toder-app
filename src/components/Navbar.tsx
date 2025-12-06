@@ -34,7 +34,7 @@ const MENU_ITEMS = [
         title: "MEDYA & ETKİNLİK",
         items: [
             { label: "Haberler", href: "/#blog", icon: Newspaper, desc: "Sektörden en güncel gelişmeler" },
-            { label: "Duyurular", href: "/events", icon: Calendar, desc: "Yaklaşan etkinlikler ve programlar" },
+            { label: "Duyurular", href: "/#etkinlikler", icon: Calendar, desc: "Yaklaşan etkinlikler ve programlar" },
             { label: "Video Galeri", href: "/#medya", icon: Video, desc: "Etkinlik kayıtları ve röportajlar" },
         ]
     },
