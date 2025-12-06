@@ -1,5 +1,6 @@
 import { Analytics } from "@vercel/analytics/react";
 import Chatbot from "@/components/Chatbot";
+import CommandPalette from "@/components/CommandPalette";
 import Script from "next/script";
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
@@ -104,6 +105,7 @@ export default function RootLayout({
           `}
         </Script>
         <Chatbot />
+        <CommandPalette />
         <Analytics />
       </body>
     </html>
