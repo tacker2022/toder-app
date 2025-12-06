@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import Gallery from "@/components/Gallery";
+import EventActions from "@/components/EventActions";
 
 export default async function EventDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
@@ -54,6 +55,13 @@ export default async function EventDetailPage({ params }: { params: Promise<{ id
                             <div className="whitespace-pre-wrap text-white/80 leading-relaxed">
                                 {event.description}
                             </div>
+
+                            <EventActions
+                                title={event.title}
+                                date={event.date}
+                                description={event.description}
+                                url={`https://toder.net/events/${event.id}`}
+                            />
                         </div>
 
                         {/* Gallery Section */}
