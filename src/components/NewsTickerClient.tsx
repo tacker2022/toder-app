@@ -21,7 +21,7 @@ export default function NewsTickerClient({ items }: { items: TickerItem[] }) {
     const tickerItems = [...items, ...items, ...items];
 
     return (
-        <div className="w-full bg-[#0a0a0a] border-b border-white/5 h-10 flex items-center overflow-hidden relative z-40">
+        <div className="w-full bg-[#0a0a0a] border-b border-white/5 h-10 flex items-center overflow-hidden relative z-40 mt-[85px]">
             {/* Label */}
             <div className="h-full bg-[#D4AF37] text-black text-xs font-bold px-4 flex items-center shrink-0 z-10 shadow-lg relative">
                 <span className="animate-pulse mr-2">●</span>
