@@ -18,6 +18,8 @@ import Contact from "@/components/Contact";
 import Videos from "@/components/Videos";
 import SplashScreen from "@/components/SplashScreen";
 
+import NewsTicker from "@/components/NewsTicker";
+
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
@@ -28,6 +30,8 @@ export default async function Home() {
   return (
     <main>
       <SplashScreen members={members} />
+      <Navbar />
+      <NewsTicker />
       <Hero />
       <StatsCounter />
       <ServiceMap />
