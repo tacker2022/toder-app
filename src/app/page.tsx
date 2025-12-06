@@ -30,7 +30,7 @@ export default async function Home() {
       <SplashScreen members={members} />
       <Hero />
       <StatsCounter />
-      {/* <ServiceMap /> - Temporarily disabled due to library crash */}
+      <ServiceMap />
       <Vision />
       <Management members={members} />
       <SupervisoryBoard members={supervisoryMembers} />

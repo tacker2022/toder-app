@@ -1,74 +1,109 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import dynamic from "next/dynamic";
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { cities, City } from '@/data/turkeyMapData';
 
-const TurkeyMap = dynamic(() => import("turkey-map-react"), { ssr: false }) as any;
+interface TooltipState {
+    show: boolean;
+    name: string;
+    x: number;
+    y: number;
+}
 
 export default function ServiceMap() {
-    const [tooltip, setTooltip] = useState<{ name: string; x: number; y: number } | null>(null);
+    const [tooltip, setTooltip] = useState<TooltipState>({
+        show: false,
+        name: '',
+        x: 0,
+        y: 0,
+    });
 
-    const handleHover = (city: any, e: React.MouseEvent) => {
-        // city object format depends on the library, usually has name/plate
-        // Assuming city returns { name: "Istanbul", plate: 34, ... }
-        // The event helps us position the tooltip
-        // Wait, library might not pass event in onHover?
-        // Let's assume standard behavior or fallback.
-        // Actually this lib usually passes the city data.
+    const [activeCityId, setActiveCityId] = useState<string | null>(null);
+
+    const handleMouseMove = (e: React.MouseEvent, name: string) => {
+        // Get cursor position relative to viewport
+        const x = e.clientX;
+        const y = e.clientY;
+
+        setTooltip({
+            show: true,
+            name,
+            x,
+            y,
+        });
     };
 
-    // Since I can't be 100% sure of the library's callback signature without docs, 
-    // I'll wrap it in a div and use custom tooltips if possible, 
-    // OR create a simple implementation that works with its props.
+    const handleMouseEnter = (cityId: string) => {
+        setActiveCityId(cityId);
+    };
 
-    // Looking at common usage: <TurkeyMap hoverable customStyle={{...}} onClick={...} />
+    const handleMouseLeave = () => {
+        setActiveCityId(null);
+        setTooltip((prev) => ({ ...prev, show: false }));
+    };
 
     return (
-        <section className="py-20 bg-[#0a0a0a] overflow-hidden relative">
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_rgba(212,175,55,0.05),_transparent_70%)] pointer-events-none"></div>
-
-            <div className="container mx-auto px-4 text-center mb-12">
-                <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70 mb-4"
+        <div className="relative w-full h-full flex flex-col items-center justify-center p-4">
+            <div className="w-full max-w-5xl aspect-[2/1] relative">
+                <svg
+                    viewBox="0 0 1050 590"
+                    className="w-full h-full drop-shadow-xl"
+                    style={{ filter: "drop-shadow(0px 10px 20px rgba(0,0,0,0.4))" }}
                 >
-                    Hizmet Ağımız
-                </motion.h2>
-                <p className="text-white/60">
-                    Türkiye'nin 81 ilinde aktif hizmet ve güçlü iş birliği ağı.
-                </p>
+                    {cities.map((city) => (
+                        <motion.path
+                            key={city.id}
+                            d={city.path}
+                            id={city.id}
+                            name={city.name}
+                            initial={{ fill: "#1a1a1a", stroke: "#333", strokeWidth: 1 }}
+                            animate={{
+                                fill: activeCityId === city.id ? "#fbbf24" : "#1a1a1a", // warm amber fill on hover
+                                stroke: activeCityId === city.id ? "#f59e0b" : "#404040",
+                                scale: activeCityId === city.id ? 1.01 : 1,
+                                zIndex: activeCityId === city.id ? 10 : 1,
+                                filter: activeCityId === city.id ? "drop-shadow(0 0 10px rgba(251, 191, 36, 0.3))" : "none"
+                            }}
+                            transition={{ duration: 0.2 }}
+                            onMouseMove={(e) => handleMouseMove(e, city.name)}
+                            onMouseEnter={() => handleMouseEnter(city.id)}
+                            onMouseLeave={handleMouseLeave}
+                            className="cursor-pointer transition-all duration-300"
+                            style={{
+                                outline: 'none',
+                                transformOrigin: 'center'
+                            }}
+                        />
+                    ))}
+                </svg>
+
+                {/* Tooltip Portal or Fixed Position Overlay */}
+                <AnimatePresence>
+                    {tooltip.show && (
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.9 }}
+                            style={{
+                                position: 'fixed',
+                                left: tooltip.x + 20,
+                                top: tooltip.y - 40,
+                                pointerEvents: 'none',
+                                zIndex: 9999, // Ensure it's above everything
+                            }}
+                            className="bg-black/90 text-amber-400 text-sm font-bold px-4 py-2 rounded-full border border-amber-500/30 shadow-2xl backdrop-blur-sm"
+                        >
+                            {tooltip.name}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
 
-            <div className="container mx-auto px-4 max-w-5xl relative flex justify-center">
-                <div className="w-full h-full md:scale-110">
-                    <TurkeyMap
-                        hoverable={true}
-                        customStyle={{
-                            idleColor: "#1a1a1a",
-                            hoverColor: "#D4AF37",
-                        }}
-                        showTooltip={true} // The library has built-in tooltip support
-                        onClick={(city: any) => {
-                            // Optional: Navigate to city detail
-                            // const name = city.name;
-                        }}
-                    />
-                </div>
+            {/* Decorative Legend or Info */}
+            <div className="absolute bottom-4 right-4 text-xs text-white/20 select-none">
+                81 İl Hizmet Noktası
             </div>
-
-            {/* Stats Overlay or Legend */}
-            <div className="container mx-auto px-4 mt-8 flex justify-center gap-8 text-xs md:text-sm text-white/40">
-                <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-[#D4AF37] rounded-full"></div>
-                    <span>Aktif Hizmet</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-[#1a1a1a] border border-white/10 rounded-full"></div>
-                    <span>Temsilcilik</span>
-                </div>
-            </div>
-        </section>
+        </div>
     );
 }
