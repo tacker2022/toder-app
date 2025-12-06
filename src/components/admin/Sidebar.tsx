@@ -59,7 +59,7 @@ export default function AdminSidebar() {
                         }`}
                 >
                     <Calendar size={20} />
-                    Etkinlikler
+                    Duyurular
                 </Link>
                 <Link
                     href="/admin/faqs"
