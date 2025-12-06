@@ -12,12 +12,18 @@ export default function Vision() {
         <section id="vizyon" className="py-20 bg-black relative overflow-hidden" ref={ref}>
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
-                    <h2 className="section-title text-[#D4AF37]">
-                        Vizyon & Misyon
+                    <h2 className="section-title text-[#D4AF37] mb-6">
+                        Biz Kimiz?
                     </h2>
-                    <p className="max-w-2xl mx-auto text-white/60">
-                        Otomotiv sektörünün geleceğine yön veren stratejik hedeflerimiz.
-                    </p>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="max-w-4xl mx-auto text-lg text-white/70 leading-relaxed mb-12"
+                    >
+                        TODER (Tüm Otopark Entegratör Yatırımcı ve İşletmecileri Derneği), Türkiye’de otopark sektörünü ortak bir çatı altında toplayarak; teknoloji, standartlaşma ve sürdürülebilir işletmecilik alanlarında güçlü bir ekosistem oluşturmayı hedefleyen bağımsız bir sektörel birliktir. Otopark entegratörleri, yatırımcılar, işletmeciler ve teknoloji sağlayıcılarını aynı platformda buluşturan TODER, sektörün ihtiyaçlarını analiz ederek ortak çözümler üretir, mevzuat gelişimlerine liderlik eder ve tüm paydaşların daha verimli, şeffaf ve yenilikçi bir yapıda hizmet verebilmesi için çalışmalar yürütür. Türkiye’nin mobilite, planlı şehirler ve kentsel dönüşüm vizyonu doğrultusunda; modern otopark işletmeciliğinin geleceğini şekillendirmeyi ve akıllı şehir altyapısının güçlü bir parçası olmayı amaçlar.
+                    </motion.p>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
