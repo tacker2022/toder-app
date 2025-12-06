@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Calendar, FileText, info, Home, UserPlus, X, ChevronRight } from "lucide-react";
+import { Search, Calendar, FileText, Info, Home, UserPlus, X, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -29,11 +29,11 @@ export default function CommandPalette() {
 
     const menuItems = [
         { icon: <Home size={18} />, label: "Ana Sayfa", href: "/", category: "Navigasyon" },
-        { icon: <info size={18} />, label: "Hakkımızda", href: "/#vizyon", category: "Navigasyon" },
+        { icon: <Info size={18} />, label: "Hakkımızda", href: "/#vizyon", category: "Navigasyon" },
         { icon: <UserPlus size={18} />, label: "Üyelik Başvurusu", href: "/basvuru", category: "İşlem" },
         { icon: <Calendar size={18} />, label: "Etkinlikler", href: "/#etkinlikler", category: "Navigasyon" },
         { icon: <FileText size={18} />, label: "Mevzuat Bilgi Bankası", href: "/legislation", category: "Kaynak" },
-        { icon: <info size={18} />, label: "Sıkça Sorulan Sorular", href: "/faq", category: "Kaynak" },
+        { icon: <Info size={18} />, label: "Sıkça Sorulan Sorular", href: "/faq", category: "Kaynak" },
     ];
 
     const filteredItems = menuItems.filter((item) =>
