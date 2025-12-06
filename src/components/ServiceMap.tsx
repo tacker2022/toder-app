@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import dynamic from "next/dynamic";
 
-const TurkeyMap = dynamic(() => import("turkey-map-react"), { ssr: false });
+const TurkeyMap = dynamic(() => import("turkey-map-react"), { ssr: false }) as any;
 
 export default function ServiceMap() {
     const [tooltip, setTooltip] = useState<{ name: string; x: number; y: number } | null>(null);
