@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import HeroParticles from "@/components/HeroParticles";
 
 export default function Hero() {
     return (
@@ -32,6 +33,7 @@ export default function Hero() {
                     }}
                 />
                 <div className="grid-overlay"></div>
+                <HeroParticles />
             </div>
             <div className="container hero-content">
                 <motion.div
