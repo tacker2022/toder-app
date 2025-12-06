@@ -50,8 +50,9 @@ export default function ServiceMap() {
                             hoverColor: "#D4AF37",
                         }}
                         showTooltip={true} // The library has built-in tooltip support
-                        onClick={({ name }) => {
+                        onClick={(city: any) => {
                             // Optional: Navigate to city detail
+                            // const name = city.name;
                         }}
                     />
                 </div>
