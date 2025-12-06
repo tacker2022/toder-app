@@ -2,10 +2,7 @@ import Navbar from "@/components/Navbar";
 
 import Hero from "@/components/Hero";
 import StatsCounter from "@/components/StatsCounter";
-import StatsCounter from "@/components/StatsCounter";
-// Dynamic import for ServiceMap to avoid SSR issues
-import dynamicImport from 'next/dynamic';
-const ServiceMap = dynamicImport(() => import('@/components/ServiceMap'), { ssr: false });
+import ServiceMap from "@/components/ServiceMap";
 import Vision from "@/components/Vision";
 import Management from "@/components/Management";
 import SupervisoryBoard from "@/components/SupervisoryBoard";
