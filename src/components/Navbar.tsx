@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     ChevronDown,
@@ -197,45 +198,63 @@ export default function Navbar() {
             {/* Mobile Menu Overlay */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, x: "100%" }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: "100%" }}
-                        transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                        className="fixed inset-0 bg-black z-40 md:hidden pt-24 px-6 overflow-y-auto"
-                    >
-                        <div className="flex flex-col gap-6">
-                            {MENU_ITEMS.map((menu, idx) => (
-                                <div key={idx} className="border-b border-white/10 pb-6 last:border-0">
-                                    <h3 className="text-[#D4AF37] font-bold mb-4 text-sm tracking-wider uppercase">
-                                        {menu.title}
-                                    </h3>
-                                    <div className="grid gap-4">
-                                        {menu.items.map((item, i) => (
-                                            <Link
-                                                key={i}
-                                                href={item.href}
-                                                onClick={(e) => handleLinkClick(e, item.href)}
-                                                className="flex items-center gap-3 text-white/80 hover:text-white"
-                                            >
-                                                <item.icon size={18} className="text-[#D4AF37]/70" />
-                                                {item.label}
-                                            </Link>
-                                        ))}
+                    <Portal>
+                        <motion.div
+                            initial={{ opacity: 0, x: "100%" }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: "100%" }}
+                            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                            className="fixed inset-0 bg-black z-[10002] md:hidden pt-24 px-6 overflow-y-auto"
+                        >
+                            <div className="flex flex-col gap-6">
+                                {MENU_ITEMS.map((menu, idx) => (
+                                    <div key={idx} className="border-b border-white/10 pb-6 last:border-0">
+                                        <h3 className="text-[#D4AF37] font-bold mb-4 text-sm tracking-wider uppercase">
+                                            {menu.title}
+                                        </h3>
+                                        <div className="grid gap-4">
+                                            {menu.items.map((item, i) => (
+                                                <Link
+                                                    key={i}
+                                                    href={item.href}
+                                                    onClick={(e) => handleLinkClick(e, item.href)}
+                                                    className="flex items-center gap-3 text-white/80 hover:text-white"
+                                                >
+                                                    <item.icon size={18} className="text-[#D4AF37]/70" />
+                                                    {item.label}
+                                                </Link>
+                                            ))}
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-                            <Link
-                                href="/basvuru"
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="w-full bg-[#D4AF37] text-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 mt-4"
-                            >
-                                Üye Başvurusu
-                            </Link>
-                        </div>
-                    </motion.div>
+                                ))}
+                                <Link
+                                    href="/basvuru"
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="w-full bg-[#D4AF37] text-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 mt-4"
+                                >
+                                    Üye Başvurusu
+                                </Link>
+                            </div>
+                        </motion.div>
+                    </Portal>
                 )}
             </AnimatePresence>
         </nav>
     );
+}
+
+// Simple Portal Component
+function Portal({ children }: { children: React.ReactNode }) {
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+        return () => setMounted(false);
+    }, []);
+
+    if (!mounted) return null;
+
+    return typeof document !== "undefined"
+        ? createPortal(children, document.body)
+        : null;
 }
