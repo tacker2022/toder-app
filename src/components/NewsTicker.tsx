@@ -1,12 +1,14 @@
+import { getEvents } from "@/actions/events";
 import { getPosts } from "@/actions/posts";
 import { getLegislations } from "@/actions/legislations";
 import NewsTickerClient, { TickerItem } from "./NewsTickerClient";
 
 export default async function NewsTicker() {
     // Fetch data in parallel
-    const [postsData, legislationsData] = await Promise.all([
+    const [postsData, legislationsData, eventsData] = await Promise.all([
         getPosts(),
-        getLegislations()
+        getLegislations(),
+        getEvents()
     ]);
 
     const tickerItems: TickerItem[] = [];
@@ -33,6 +35,19 @@ export default async function NewsTicker() {
                 type: "mevzuat",
                 url: leg.pdf_url || `/legislation`, // Fallback if no PDF
                 date: leg.published_date
+            });
+        });
+    }
+
+    // Map events to ticker items (take latest 3)
+    if (eventsData && Array.isArray(eventsData)) {
+        eventsData.slice(0, 3).forEach((event: any) => {
+            tickerItems.push({
+                id: `event-${event.id}`,
+                title: event.title,
+                type: "duyuru",
+                url: `/events/${event.id}`,
+                date: event.date // Using event date, or created_at if preferred
             });
         });
     }

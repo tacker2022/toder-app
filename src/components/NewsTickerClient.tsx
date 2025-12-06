@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 export interface TickerItem {
     id: string;
     title: string;
-    type: "haber" | "mevzuat";
+    type: "haber" | "mevzuat" | "duyuru";
     url: string;
     date: string;
 }
@@ -53,7 +53,9 @@ export default function NewsTickerClient({ items }: { items: TickerItem[] }) {
                             href={item.url}
                             className="group flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
                         >
-                            <span className={`px-1.5 py-0.5 rounded text-[10px] uppercase font-semibold ${item.type === 'haber' ? 'bg-blue-500/20 text-blue-400' : 'bg-green-500/20 text-green-400'
+                            <span className={`px-1.5 py-0.5 rounded text-[10px] uppercase font-semibold ${item.type === 'haber' ? 'bg-blue-500/20 text-blue-400' :
+                                item.type === 'duyuru' ? 'bg-purple-500/20 text-purple-400' :
+                                    'bg-green-500/20 text-green-400'
                                 }`}>
                                 {item.type}
                             </span>
