@@ -13,7 +13,7 @@ export default async function BlogPage() {
                     <Link href="/" className="text-white/50 hover:text-white transition-colors">
                         <ArrowLeft size={24} />
                     </Link>
-                    <h1 className="text-4xl font-bold">Haberler & Duyurular</h1>
+                    <h1 className="text-4xl font-bold">Haberler & Etkinlikler</h1>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

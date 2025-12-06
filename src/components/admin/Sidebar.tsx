@@ -10,7 +10,7 @@ export default function AdminSidebar() {
 
     const links = [
         { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
-        { href: "/admin/events", label: "Etkinlikler", icon: Calendar },
+        { href: "/admin/events", label: "Duyurular", icon: Calendar },
         { href: "/admin/members", label: "Yönetim Kurulu", icon: Users },
         { href: "/admin/supervisory", label: "Denetim Kurulu", icon: Users },
         { href: "/admin/associations", label: "Üye Kuruluşlar", icon: Users },
@@ -49,7 +49,7 @@ export default function AdminSidebar() {
                         }`}
                 >
                     <Newspaper size={20} />
-                    <span>Haberler</span>
+                    <span>Haberler & Etkinlikler</span>
                 </Link>
                 <Link
                     href="/admin/events"

@@ -18,7 +18,7 @@ export default function Events({ events }: { events: Event[] }) {
             <div className="parallax-bg"></div>
             <div className="container">
                 <div className="section-header">
-                    <h2 className="section-title">Etkinlikler & Duyurular</h2>
+                    <h2 className="section-title">Duyurular</h2>
                     <div className="section-line"></div>
                 </div>
                 <div className="events-list">
