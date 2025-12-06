@@ -204,9 +204,22 @@ export default function Navbar() {
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: "100%" }}
                             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                            className="fixed inset-0 bg-black z-[10002] md:hidden pt-24 px-6 overflow-y-auto"
+                            className="fixed inset-0 bg-black z-[10002] md:hidden px-4 overflow-y-auto" // Removed pt-24, added flex col
                         >
-                            <div className="flex flex-col gap-6">
+                            {/* Mobile Menu Header */}
+                            <div className="flex items-center justify-between py-6 mb-6 border-b border-white/10">
+                                <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-bold tracking-tighter">
+                                    TODER<span className="text-[#D4AF37]">.</span>
+                                </Link>
+                                <button
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="p-2 bg-white/5 rounded-full text-white hover:bg-white/10 transition-colors"
+                                >
+                                    <X size={24} />
+                                </button>
+                            </div>
+
+                            <div className="flex flex-col gap-6 pb-20">
                                 {MENU_ITEMS.map((menu, idx) => (
                                     <div key={idx} className="border-b border-white/10 pb-6 last:border-0">
                                         <h3 className="text-[#D4AF37] font-bold mb-4 text-sm tracking-wider uppercase">
