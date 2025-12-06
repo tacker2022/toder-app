@@ -1,5 +1,3 @@
-import Navbar from "@/components/Navbar";
-
 import Hero from "@/components/Hero";
 import StatsCounter from "@/components/StatsCounter";
 import ServiceMap from "@/components/ServiceMap";
@@ -30,7 +28,6 @@ export default async function Home() {
   return (
     <main>
       <SplashScreen members={members} />
-      <Navbar />
       <NewsTicker />
       <Hero />
       <StatsCounter />

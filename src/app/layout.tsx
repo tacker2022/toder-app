@@ -9,6 +9,7 @@ import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import FilmGrain from "@/components/FilmGrain";
 import SmoothScroll from "@/components/SmoothScroll";
+import Navbar from "@/components/Navbar";
 import { SplashProvider } from "@/context/SplashContext";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -71,6 +72,7 @@ export default function RootLayout({
     <html lang="tr">
       <body className={`${inter.variable} ${outfit.variable} antialiased`}>
         <SplashProvider>
+          <Navbar />
           {children}
           <FilmGrain />
           <SmoothScroll />
