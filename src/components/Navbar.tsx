@@ -73,12 +73,12 @@ export default function Navbar() {
 
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 ${scrolled ? "bg-black/80 backdrop-blur-md py-4 border-b border-white/10" : "bg-transparent py-6"
+            className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 ${scrolled ? "bg-black/80 backdrop-blur-md py-4 border-b border-white/10" : "bg-transparent py-6"
                 }`}
             onMouseLeave={() => setActiveTab(null)}
         >
             <div className="container mx-auto px-4 flex items-center justify-between">
-                <Link href="/" className="text-2xl font-bold tracking-tighter z-50 relative">
+                <Link href="/" className="text-2xl font-bold tracking-tighter z-[10000] relative">
                     TODER<span className="text-[#D4AF37]">.</span>
                 </Link>
 
@@ -116,10 +116,11 @@ export default function Navbar() {
 
                 {/* Mobile Menu Toggle */}
                 <button
-                    className="md:hidden text-white p-2 z-50 relative"
+                    className="md:hidden text-white p-3 -mr-2 z-[10000] relative hover:bg-white/10 rounded-full transition-colors"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    aria-label="Toggle Menu"
                 >
-                    {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
                 </button>
             </div>
 
@@ -131,7 +132,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
                         transition={{ duration: 0.2 }}
-                        className="hidden md:block absolute top-full left-0 right-0 bg-[#0a0a0a]/95 backdrop-blur-xl border-t border-b border-white/10 shadow-2xl z-40"
+                        className="hidden md:block absolute top-full left-0 right-0 bg-[#0a0a0a]/95 backdrop-blur-xl border-t border-b border-white/10 shadow-2xl z-[9998]"
                         onMouseEnter={() => setActiveTab(activeTab)}
                         onMouseLeave={() => setActiveTab(null)}
                     >
