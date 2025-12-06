@@ -51,16 +51,7 @@ export default function AdminSidebar() {
                     <Newspaper size={20} />
                     <span>Haberler & Etkinlikler</span>
                 </Link>
-                <Link
-                    href="/admin/events"
-                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${pathname.startsWith("/admin/events")
-                        ? "bg-[#D4AF37] text-black font-medium"
-                        : "text-white/60 hover:bg-white/5 hover:text-white"
-                        }`}
-                >
-                    <Calendar size={20} />
-                    Duyurular
-                </Link>
+
                 <Link
                     href="/admin/faqs"
                     className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${pathname.startsWith("/admin/faqs")
