@@ -1,7 +1,7 @@
 import { getEvents } from "@/actions/events";
 import { Calendar, ArrowRight, ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import ImageReveal from "@/components/ui/ImageReveal";
+
 
 export default async function EventsPage() {
     const events = await getEvents();
@@ -25,10 +25,10 @@ export default async function EventsPage() {
                         >
                             <div className="aspect-video bg-black/50 relative overflow-hidden">
                                 {event.list_image_url || event.image_url ? (
-                                    <ImageReveal
+                                    <img
                                         src={event.list_image_url || event.image_url}
                                         alt={event.title}
-                                        className="w-full h-full"
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     />
                                 ) : (
                                     <div className="w-full h-full flex items-center justify-center text-white/20">

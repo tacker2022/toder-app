@@ -1,7 +1,7 @@
 import { getPosts } from "@/actions/posts";
 import { Calendar, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import ImageReveal from "@/components/ui/ImageReveal";
+
 
 export default async function BlogSection() {
     const posts = await getPosts();
@@ -36,10 +36,10 @@ export default async function BlogSection() {
                         >
                             <div className="aspect-video bg-black/50 relative overflow-hidden">
                                 {post.image_url ? (
-                                    <ImageReveal
+                                    <img
                                         src={post.image_url}
                                         alt={post.title}
-                                        className="w-full h-full"
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                     />
                                 ) : (
                                     <div className="w-full h-full flex items-center justify-center text-white/20">
