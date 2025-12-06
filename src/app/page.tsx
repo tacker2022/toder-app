@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 
 import Hero from "@/components/Hero";
+import StatsCounter from "@/components/StatsCounter";
 import Vision from "@/components/Vision";
 import Management from "@/components/Management";
 import SupervisoryBoard from "@/components/SupervisoryBoard";
@@ -27,6 +28,7 @@ export default async function Home() {
     <main>
       <SplashScreen members={members} />
       <Hero />
+      <StatsCounter />
       <Vision />
       <Management members={members} />
       <SupervisoryBoard members={supervisoryMembers} />
