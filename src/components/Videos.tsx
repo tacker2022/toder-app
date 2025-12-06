@@ -28,8 +28,8 @@ export default function Videos() {
                     <div className="section-line"></div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {videos.map((video, index) => {
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                    {videos.filter(v => !v.youtube_url.includes("/shorts/")).map((video, index) => {
                         const videoId = getYouTubeID(video.youtube_url);
                         const thumbnailUrl = videoId
                             ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
@@ -70,6 +70,66 @@ export default function Videos() {
                         );
                     })}
                 </div>
+
+                {/* Shorts Section */}
+                {videos.some(v => v.youtube_url.includes("/shorts/")) && (
+                    <div className="mt-16">
+                        <div className="flex items-center gap-4 mb-8">
+                            <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#D4AF37] to-[#F2D06B]">
+                                TODER Shorts
+                            </h3>
+                            <div className="h-px flex-1 bg-white/10"></div>
+                        </div>
+
+                        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                            {videos.filter(v => v.youtube_url.includes("/shorts/")).map((video, index) => {
+                                const videoId = getYouTubeID(video.youtube_url);
+                                const thumbnailUrl = videoId
+                                    ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg` // Shorts often use the same thumbnail format
+                                    : null;
+
+                                return (
+                                    <motion.div
+                                        key={video.id}
+                                        className="group cursor-pointer relative"
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        viewport={{ once: true }}
+                                        transition={{ duration: 0.4, delay: index * 0.05 }}
+                                        onClick={() => videoId && setSelectedVideo(videoId)}
+                                    >
+                                        <div className="relative aspect-[9/16] rounded-xl overflow-hidden border border-white/10 bg-black">
+                                            {thumbnailUrl ? (
+                                                <img
+                                                    src={thumbnailUrl}
+                                                    alt={video.title}
+                                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                />
+                                            ) : (
+                                                <div className="w-full h-full flex items-center justify-center">
+                                                    <Play size={32} className="text-white/20" />
+                                                </div>
+                                            )}
+                                            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 opacity-60 group-hover:opacity-40 transition-opacity"></div>
+
+                                            <div className="absolute bottom-4 left-4 right-4">
+                                                <p className="text-sm font-medium text-white line-clamp-2 leading-snug group-hover:text-[#D4AF37] transition-colors">
+                                                    {video.title}
+                                                </p>
+                                            </div>
+
+                                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
+                                                    <Play size={24} className="text-white ml-1" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
             </div>
 
             {/* Video Modal */}
