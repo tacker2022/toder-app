@@ -25,21 +25,17 @@ export async function addLegislation(formData: FormData) {
     const category = formData.get("category") as string;
     const published_date = formData.get("published_date") as string;
     const pdfFile = formData.get("pdf") as File;
+    const clientPdfUrl = formData.get("pdf_url") as string;
 
-    let pdfUrl = "";
+    let pdfUrl = clientPdfUrl || "";
 
-    if (pdfFile && pdfFile.size > 0) {
+    // Fallback: Server-side upload if file is provided but no URL (legacy support or small files)
+    if (!pdfUrl && pdfFile && pdfFile.size > 0) {
         try {
             const extension = pdfFile.name.split('.').pop() || 'pdf';
             const filename = `legis-${Date.now()}-${Math.random().toString(36).substring(7)}.${extension}`;
             const { data, error } = await supabase.storage
-                .from("documents") // Assuming a 'documents' bucket exists or we use 'images' for now? Better to check/create 'documents'. Let's stick to 'images' if 'documents' doesn't exist, but usually PDFs go to documents. I'll try 'documents' and if it fails user might need to create it. Or I can use 'images' bucket if it allows all types, but 'documents' is cleaner. Let's assume 'documents' bucket needs to be created or we use 'public' bucket.
-                // Actually, let's check if we can use a generic bucket. The user has 'images' bucket.
-                // I'll use 'images' bucket for now to avoid another bucket creation step if possible, but PDFs in 'images' is weird.
-                // Let's ask user to create 'documents' bucket or just use 'images' if it allows.
-                // Safest bet: Use 'images' bucket but rename it mentally to 'public_assets' or similar.
-                // Wait, I should probably ask user to create 'documents' bucket.
-                // For now, I will try to upload to 'documents'. If it fails, I'll handle it.
+                .from("documents")
                 .upload(filename, pdfFile, {
                     cacheControl: "3600",
                     upsert: false,
@@ -54,8 +50,6 @@ export async function addLegislation(formData: FormData) {
             pdfUrl = publicUrlData.publicUrl;
         } catch (uploadError) {
             console.error("Failed to upload legislation PDF:", uploadError);
-            // Fallback: try 'images' bucket if 'documents' fails? No, that's messy.
-            // I'll return error.
             return { error: `Upload Error: ${(uploadError as Error).message}. Make sure 'documents' bucket exists.` };
         }
     }
